@@ -1,16 +1,24 @@
-#ifndef EDITOR_
-#define EDITOR_
+#ifndef EDITOR_H_
+#define EDITOR_H_
+
 #include "LinkedList.h"
+
+#include<fstream>
 #include<string>
+#include<memory>
+using namespace std;
+
 class editor {
 
 private:
-	LinkedList <std::string> Line;
+	LinkedList<string> lines;
 public:
-	void Editor();
+	editor();
+	editor(string file);
 	void DisplayLines();
-	void run();
-	void placeCursorAt(Position coordinate);
+//	void run();
+	
+
 	/* Future methods
 	void moveUp();
 	void movedown();
@@ -22,5 +30,4 @@ public:
 
 };
 #include "editor.cpp"
-
 #endif 
