@@ -3,9 +3,9 @@ Position::Position() {
 	x = 0;
 	y = 0;
 }
-int Position::getX() {
+int Position::getX() const {
 	return x;
 }
-int Position::getY() {
+int Position::getY() const {
 	return y;
 }
