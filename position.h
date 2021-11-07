@@ -1,0 +1,16 @@
+#pragma once
+
+class Position
+{
+private:
+	int x;
+	int y;
+public:
+	Position();
+	void setX();
+	void setY();
+	int getX();
+	int getY();
+
+};
+
