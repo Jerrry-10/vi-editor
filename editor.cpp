@@ -44,7 +44,7 @@ editor::editor(string file) {
 void editor::DisplayLines() {
     if (!lines.isEmpty()) {
         int numoflines = lines.getLength();
-        for (int i = 1; i < numoflines; i++)
+        for (int i = 1; i < numoflines + 1; i++)
         {
             cout << lines.getEntry(i) << endl;
         }
