@@ -9,8 +9,8 @@ public:
 	Position();
 	void setX();
 	void setY();
-	int getX();
-	int getY();
+	int getX() const;
+	int getY() const;
 
 };
 
