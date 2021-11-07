@@ -52,6 +52,25 @@ void editor::DisplayLines() {
 }
 /*void editor::run() {
 
+    char command;
+    
+    while(//?)
+    
+    {
+        getch(command);
+        switch(command)
+        {
+            case 'x':
+                //delete current char
+            break;
+            case ':'
+                if (command == 'w')
+                    //call function to write to file.
+                else if (command == 'q')
+                    //quit if no changes.
+            break;
+        }
+
 }
 */
 
