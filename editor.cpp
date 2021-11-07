@@ -26,7 +26,8 @@ editor::editor(string file) {
     ifstream in;
     in.open(file);
     if(!in) {
-        cout << "File not found..." << endl;
+        cerr << "File not found..." << endl;
+        exit(1);
     }
     else {
         string line;
