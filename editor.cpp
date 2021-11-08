@@ -32,12 +32,12 @@ editor::editor(string file) {
     }
     else {
         string line;
-        int linenum = 1;
+        int lineNumber = 1;
         while (!in.eof()) { 
             getline(in, line);
            // cout << line << endl; // This is for testing to see what is being read
-            lines.insert(linenum, line); // Puts the lines into the linkedlist
-            linenum++; //Increases the number so I can insert the next lines into the linkedlist
+            lines.insert(lineNumber, line); // Puts the lines into the linkedlist
+            lineNumber++; //Increases the number so I can insert the next lines into the linkedlist
         }
     }
     in.close();
@@ -56,22 +56,24 @@ void editor::displayLines() {
     char command = '\0';
     bool endProgram = false;
     
-    //Create position object which denotes the first space on the first empty line.
-    Position endOfFile (0, (lines.getLength() + 1) );
-    
+    //Loop to process commands entered by user.
     while(!endProgram)
-    
     {
         getch(command); //Do we need getwch?
         
+        //Switch to execute the appropriate code depending on command entered.
         switch(command)
         {
             case 'x':
                 //delete current char. Can use parameterized version of the string function erase
             break;
             case ':'
-                //Move cursor to bottom. 
+                    //Create position object which denotes the first space on the first empty line.
+                Position endOfFile (0, (lines.getLength() + 1) );
+                    
+                    //Move cursor to bottom. 
                 placeCursorAt(endOfFile);
+                
                 if (command == 'w')
                 {
                     //call function to write to file.
