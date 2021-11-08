@@ -41,7 +41,9 @@ public:
 	@post  Each entry in lines is printed to the screen on its own line. */
 	void displayLines();
 	
-	//	void run();
+	/**Function to read in user's commands as single characters and execute them.
+	@post user's commands have been executed. */
+	void run();
 
 
 		/* Future methods
