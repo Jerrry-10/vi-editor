@@ -17,7 +17,12 @@ private:
 	
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
-	writeToFile();
+	void writeToFile();
+	
+	/**Helper function to delete the character at the user's current position.
+	@param userPosition  The current position of the user's cursor in the editor.
+	@post  The character at the userPosition has been deleted. */
+	void deleteCurrentCharacter(Position userPosition);
 	
 public:
 	/** Default Constructor.
