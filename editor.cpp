@@ -80,17 +80,7 @@ void editor::displayLines() {
 
                 if (command == 'w')
                 {
-                    ifstream outfile;
-                    outfile = ("test.txt");
-
-                    //Loop to write each line to the output file.
-                    for (int i = 1; i < numberOfLines + 1; i++)
-                    {
-                        outfile << lines.getEntry(i);
-                    }
-
-                    outfile.close();
-
+                    writeToFile();
                 }
                 else if (command == 'q')
                     {
@@ -101,5 +91,16 @@ void editor::displayLines() {
 }
 */
 
+void editor::writeToFile()
+{
+    ifstream outfile;
+    outfile = ("test.txt");
 
-//void editor::
+    //Loop to write each line to the output file.
+    for (int i = 1; i < numberOfLines + 1; i++)
+    {
+        outfile << lines.getEntry(i);
+    }
+
+    outfile.close();
+}
