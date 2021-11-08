@@ -5,6 +5,9 @@ Position::Position() {
 	y = 0;
 }
 
+Position::Position(int incomingX, int incomingY) : x (incomingX), y (incomingY)
+{}
+
 void Position::setX(int newX)
 {
 	x = newX;
