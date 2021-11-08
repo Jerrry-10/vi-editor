@@ -25,7 +25,7 @@ public:
 	@post  Prints error message and terminates program if file cannot be opened.
 		Otherwise, each line in file becomes an item in the list lines. */
 	editor(string file);
-	void DisplayLines();
+	void displayLines();
 //	void run();
 	
 
