@@ -18,7 +18,7 @@ public:
 	@post  Instantiates empty Editor object.
 	*/
 	editor();
-	
+
 	/** Constructor which instantiates an Editor object by reading a text file into it.
 	@param file  The name of the file to be read in.
 	@pre  The string file denotes a valid text file in the same directory as the project.
@@ -26,18 +26,17 @@ public:
 		Otherwise, each line in file becomes an item in the list lines. */
 	editor(string file);
 	void displayLines();
-//	void run();
-	
+	//	void run();
 
-	/* Future methods
-	void moveUp();
-	void movedown();
-	void moveleft();
-	void moveright();
-	void deleteChar();
 
-	*/
+		/* Future methods
+		void moveUp();
+		void movedown();
+		void moveleft();
+		void moveright();
+		void deleteChar();
+		*/
 
 };
-
+#include"editor.cpp"
 #endif 

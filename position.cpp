@@ -1,12 +1,13 @@
 #include "position.h"
-#include <xmemory>
+
 Position::Position() {
 	x = 0;
 	y = 0;
 }
 
-Position::Position(int incomingX, int incomingY) : x (incomingX), y (incomingY)
-{}
+Position::Position(int incomingX, int incomingY) : x(incomingX), y(incomingY)
+{
+}
 
 void Position::setX(int newX)
 {
@@ -15,7 +16,7 @@ void Position::setX(int newX)
 
 void Position::setY(int newY)
 {
-	 y = newY;
+	y = newY;
 }
 
 int Position::getX() const {
@@ -25,4 +26,3 @@ int Position::getX() const {
 int Position::getY() const {
 	return y;
 }
-
