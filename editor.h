@@ -21,7 +21,7 @@ private:
 	
 	/**Helper function to delete the character at the user's current position.
 	@param  userPosition  The current position of the user's cursor in the editor.
-	@post  The character at the userPosition has been deleted. */
+	@post  The character at userPosition has been deleted. */
 	void deleteCurrentCharacter(Position userPosition);
 	
 	/**Helper function to read, echo, and execute user's end-of-program commands after ':'
