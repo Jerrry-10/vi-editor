@@ -79,8 +79,8 @@ void editor::run() {
 
                     //Move cursor to bottom.
                 placeCursorAt(endOfFile);
-                //Process the user's endOfFile commands ('w' or 'q').
-               endProgram = endOfFileCommand(endProgram);
+                //Process the user's end-of-file commands ('w' or 'q').
+               endProgram = endOfFileCommand();
             break;
         }
 }
