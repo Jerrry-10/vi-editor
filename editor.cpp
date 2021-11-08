@@ -49,6 +49,8 @@ void editor::displayLines() {
         {
             cout << lines.getEntry(i) << endl;
         }
+        Position userPosition;
+        placeCursorAt(userPosition);
     }
 }
 /*void editor::run() {
