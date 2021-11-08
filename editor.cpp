@@ -59,17 +59,19 @@ void editor::displayLines() {
 /*void editor::run() {
     char command = '\0';
     bool endProgram = false;
+    Position userPosition;
+   
 
     //Loop to process commands entered by user.
     while(!endProgram)
     {
-        getch(command); //Do we need getwch?
+        getch(command); //Do we need getwch? Depends on compiler.
 
         //Switch to execute the appropriate code depending on command entered.
         switch(command)
         {
             case 'x':
-                //delete current char. Can use parameterized version of the string function erase
+                deleteCurrentCharacter(userPosition);
             break;
             case ':'
                     //Create position object which denotes the first space on the first empty line.
@@ -103,4 +105,18 @@ void editor::writeToFile()
     }
 
     outfile.close();
+}
+
+void editor::deleteCurrentCharacter(Position userPosition)
+{
+    string tempString = "";
+    int lineNumber = userPosition.getY();
+    int characterPosition = userPosition.getX();
+                
+    //delete current char.
+    tempString = lines.getEntry(lineNumber);
+    tempString.erase(characterPosition, 1);
+                
+    //Replace original string with altered string.
+    lines.replace(lineNumber, tempString);
 }
