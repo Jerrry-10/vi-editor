@@ -20,7 +20,7 @@ private:
 	void writeToFile();
 	
 	/**Helper function to delete the character at the user's current position.
-	@param userPosition  The current position of the user's cursor in the editor.
+	@param  userPosition  The current position of the user's cursor in the editor.
 	@post  The character at the userPosition has been deleted. */
 	void deleteCurrentCharacter(Position userPosition);
 	
@@ -47,7 +47,7 @@ public:
 	void displayLines();
 	
 	/**Function to read in user's commands as single characters and execute them.
-	@post user's commands have been executed. */
+	@post  User's commands have been executed. */
 	void run();
 
 
