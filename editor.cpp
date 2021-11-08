@@ -54,8 +54,10 @@ void editor::displayLines() {
 /*void editor::run() {
 
     char command = '\0';
-    Position endOfFile;
     bool endProgram = false;
+    
+    //Create position object which denotes the first space on the first empty line.
+    Position endOfFile (0, (lines.getLength() + 1) );
     
     while(!endProgram)
     
