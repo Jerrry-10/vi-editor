@@ -56,12 +56,12 @@ void editor::displayLines() {
     }
     
 }
-/*void editor::run() {
+
+void editor::run() {
     char command = '\0';
     bool endProgram = false;
     Position userPosition;
    
-
     //Loop to process commands entered by user.
     while(!endProgram)
     {
@@ -91,7 +91,6 @@ void editor::displayLines() {
             break;
         }
 }
-*/
 
 void editor::writeToFile()
 {
