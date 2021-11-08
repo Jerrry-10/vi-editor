@@ -1,6 +1,7 @@
 #include "editor.h"
 #include "LinkedList.h"
 #include<iostream>
+#include "position.h"
 
 using namespace std;
 
@@ -41,10 +42,10 @@ editor::editor(string file) {
     }
     in.close();
 }
-void editor::DisplayLines() {
+void editor::displayLines() {
     if (!lines.isEmpty()) {
-        int numoflines = lines.getLength();
-        for (int i = 1; i < numoflines + 1; i++)
+        int numberOfLines = lines.getLength();
+        for (int i = 1; i < numberOfLines + 1; i++)
         {
             cout << lines.getEntry(i) << endl;
         }
@@ -52,22 +53,31 @@ void editor::DisplayLines() {
 }
 /*void editor::run() {
 
-    char command;
+    char command = '\0';
+    Position endOfFile;
+    bool endProgram = false;
     
-    while(//?)
+    while(!endProgram)
     
     {
-        getch(command);
+        getch(command); //Do we need getwch?
+        
         switch(command)
         {
             case 'x':
-                //delete current char
+                //delete current char. Can use parameterized version of the string function erase
             break;
             case ':'
+                //Move cursor to bottom. 
+                placeCursorAt(endOfFile);
                 if (command == 'w')
+                {
                     //call function to write to file.
+                }
                 else if (command == 'q')
-                    //quit if no changes.
+                    {
+                        endProgram = true;
+                    }
             break;
         }
 
