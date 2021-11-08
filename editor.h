@@ -24,6 +24,11 @@ private:
 	@post  The character at the userPosition has been deleted. */
 	void deleteCurrentCharacter(Position userPosition);
 	
+	/**Helper function to read, echo, and execute user's end-of-program commands after ':'
+	@post  User's final commands have been executed. Invalid commands have been ignored.
+	@return  True if user has entered the command to quit the program and false otherwise. */
+	bool endOfFileCommand();
+	
 public:
 	/** Default Constructor.
 	@post  Instantiates empty Editor object.
