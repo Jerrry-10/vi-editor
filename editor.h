@@ -13,7 +13,7 @@ using namespace std;
 class editor {
 
 private:
-	LinkedList<string> lines;
+	LinkedList<string> lines; //A list of lines of text.
 	
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
