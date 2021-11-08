@@ -14,6 +14,11 @@ class editor {
 
 private:
 	LinkedList<string> lines;
+	
+	/** Helper function to write contents of Editor object to output file.
+	@post  Contents written to file "test.txt" */
+	writeToFile();
+	
 public:
 	/** Default Constructor.
 	@post  Instantiates empty Editor object.
