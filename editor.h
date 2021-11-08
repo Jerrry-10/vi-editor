@@ -39,5 +39,5 @@ public:
 	*/
 
 };
-#include "editor.cpp"
+
 #endif 
