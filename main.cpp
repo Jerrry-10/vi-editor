@@ -10,6 +10,7 @@ int main() {
 //	cin >> name;
 	editor vi{ "test.txt" };
 	vi.DisplayLines();
+	// run();
 
 
 	return 0;
