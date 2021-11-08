@@ -74,20 +74,13 @@ void editor::run() {
                 deleteCurrentCharacter(userPosition);
             break;
             case ':'
-                    //Create position object which denotes the first space on the first empty line.
-                Position endOfFile (0, (lines.getLength() + 1) );
+                    //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
+                Position endOfFile (0, (lines.getLength() + 5) );
 
                     //Move cursor to bottom.
                 placeCursorAt(endOfFile);
-
-                if (command == 'w')
-                {
-                    writeToFile();
-                }
-                else if (command == 'q')
-                    {
-                        endProgram = true;
-                    }
+                //Process the user's endOfFile commands ('w' or 'q').
+               endProgram = endOfFileCommand(endProgram);
             break;
         }
 }
@@ -118,4 +111,20 @@ void editor::deleteCurrentCharacter(Position userPosition)
                 
     //Replace original string with altered string.
     lines.replace(lineNumber, tempString);
+}
+
+bool editor::endOfFileCommand()
+{
+    bool endProgram = false;
+    getche(command);
+    
+    if (command == 'w')
+    {
+        writeToFile();
+    }
+    else if (command == 'q')
+         {
+            endProgram = true;
+         }
+    return endProgram;
 }
