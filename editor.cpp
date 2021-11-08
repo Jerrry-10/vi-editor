@@ -76,7 +76,17 @@ void editor::displayLines() {
                 
                 if (command == 'w')
                 {
-                    //call function to write to file.
+                    ifstream outfile;
+                    outfile = ("test.txt");
+                    
+                    //Loop to write each line to the output file.
+                    for (int i = 1; i < numberOfLines + 1; i++)
+                    {
+                        outfile << lines.getEntry(i);
+                    }
+                    
+                    outfile.close();
+                        
                 }
                 else if (command == 'q')
                     {
