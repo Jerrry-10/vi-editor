@@ -46,7 +46,9 @@ editor::editor(string file) {
         }
     }
     in.close();
+    displayLines();
 }
+
 void editor::displayLines() {
 
     if (!lines.isEmpty()) {
