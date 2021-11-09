@@ -1,3 +1,7 @@
+/** @file  editor.cpp Page 1
+@author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
+November 8, 2021
+*/
 #include "editor.h"
 #include "LinkedList.h"
 #include<iostream>
@@ -93,6 +97,8 @@ bool editor::endOfFileCommand()
     bool endProgram = false;
     command = getch();
 
+//editor.cpp Page 2
+    
     if (command == 'w')
     {
         writeToFile();
