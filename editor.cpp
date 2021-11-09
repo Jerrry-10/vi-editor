@@ -20,6 +20,44 @@ void placeCursorAt(Position coordinate) {
         coord);
 
 }
+
+editor::editor() {}
+editor::editor(string file) {
+
+    //   cout << "File: " << file << endl;
+    ifstream in;
+    in.open(file);
+    if (!in) {
+        cerr << "File not found..." << endl;
+        exit(1);
+    }
+    else {
+        string line;
+        int lineNumber = 1;
+        while (!in.eof()) {
+            getline(in, line);
+            // cout << line << endl; // This is for testing to see what is being read
+            lines.insert(lineNumber, line); // Puts the lines into the linkedlist
+            lineNumber++; //Increases the number so I can insert the next lines into the linkedlist
+        }
+    }
+    in.close();
+}
+void editor::displayLines() {
+
+    if (!lines.isEmpty()) {
+        int numberOfLines = lines.getLength();
+
+        for (int i = 1; i < numberOfLines + 1; i++)
+        {
+            cout << lines.getEntry(i) << endl;
+        }
+        Position userPosition;
+        placeCursorAt(userPosition);
+    }
+
+}
+
 void editor::writeToFile()
 {
     ofstream outfile;
@@ -65,43 +103,6 @@ bool editor::endOfFileCommand()
     }
     return endProgram;
 }
-editor::editor() {}
-editor::editor(string file) {
-
-    //   cout << "File: " << file << endl;
-    ifstream in;
-    in.open(file);
-    if (!in) {
-        cerr << "File not found..." << endl;
-        exit(1);
-    }
-    else {
-        string line;
-        int lineNumber = 1;
-        while (!in.eof()) {
-            getline(in, line);
-            // cout << line << endl; // This is for testing to see what is being read
-            lines.insert(lineNumber, line); // Puts the lines into the linkedlist
-            lineNumber++; //Increases the number so I can insert the next lines into the linkedlist
-        }
-    }
-    in.close();
-}
-void editor::displayLines() {
-
-    if (!lines.isEmpty()) {
-        int numberOfLines = lines.getLength();
-
-        for (int i = 1; i < numberOfLines + 1; i++)
-        {
-            cout << lines.getEntry(i) << endl;
-        }
-        Position userPosition;
-        placeCursorAt(userPosition);
-    }
-
-}
-
 void editor::run() {
     char command = '\0';
     bool endProgram = false;
