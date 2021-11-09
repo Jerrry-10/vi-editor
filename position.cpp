@@ -1,3 +1,7 @@
+/** @file  position.cpp Page 1
+@author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
+November 8, 2021
+*/
 #include "position.h"
 
 Position::Position() {
