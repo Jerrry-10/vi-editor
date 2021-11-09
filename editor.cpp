@@ -79,6 +79,9 @@ void editor::run() {
 
                     //Move cursor to bottom.
                 placeCursorAt(endOfFile);
+                
+                cout << ':';
+                
                 //Process the user's end-of-file commands ('w' or 'q').
                endProgram = endOfFileCommand();
             break;
