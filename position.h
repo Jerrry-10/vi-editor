@@ -1,3 +1,8 @@
+/** @file  position.h
+Class to store a position in the editor's text in the form of x y coordinates.
+@author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
+November 8, 2021
+*/
 #pragma once
 
 class Position
