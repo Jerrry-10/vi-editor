@@ -1,3 +1,5 @@
+/**
+*/
 #include "editor.h"
 #include "LinkedList.h"
 #include<iostream>
@@ -72,6 +74,7 @@ void editor::run() {
         {
             case 'x':
                 deleteCurrentCharacter(userPosition);
+                displayLines(); //allows user to see change.
             break;
             case ':'
                     //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
