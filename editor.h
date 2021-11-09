@@ -1,3 +1,8 @@
+/**@file  editor.h Page 1
+Class to create and run a primitive text editor.
+@author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
+November 8, 2021
+*/
 #ifndef EDITOR_H_
 #define EDITOR_H_
 
