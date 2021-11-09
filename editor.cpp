@@ -1,5 +1,3 @@
-/**
-*/
 #include "editor.h"
 #include "LinkedList.h"
 #include<iostream>
@@ -22,10 +20,55 @@ void placeCursorAt(Position coordinate) {
         coord);
 
 }
+void editor::writeToFile()
+{
+    ofstream outfile;
+
+    outfile.open("test.txt");
+    int numberOfLines = lines.getLength();
+    //Loop to write each line to the output file.
+    for (int i = 1; i < numberOfLines + 1; i++)
+    {
+        outfile << lines.getEntry(i);
+    }
+
+    outfile.close();
+}
+
+void editor::deleteCurrentCharacter(Position userPosition)
+{
+    string tempString = "";
+    int lineNumber = userPosition.getY();
+    int characterPosition = userPosition.getX();
+
+    //delete current char.
+    tempString = lines.getEntry(lineNumber);
+    tempString.erase(characterPosition, 1);
+
+    //Replace original string with altered string.
+    lines.replace(lineNumber, tempString);
+}
+
+bool editor::endOfFileCommand()
+{
+    char command;
+    bool endProgram = false;
+    command = getch();
+
+    if (command == 'w')
+    {
+        writeToFile();
+    }
+    else if (command == 'q')
+    {
+        endProgram = true;
+    }
+    return endProgram;
+}
 editor::editor() {}
 editor::editor(string file) {
 
- //   cout << "File: " << file << endl;
+    //   cout << "File: " << file << endl;
     ifstream in;
     in.open(file);
     if (!in) {
@@ -45,10 +88,10 @@ editor::editor(string file) {
     in.close();
 }
 void editor::displayLines() {
-   
+
     if (!lines.isEmpty()) {
         int numberOfLines = lines.getLength();
-    
+
         for (int i = 1; i < numberOfLines + 1; i++)
         {
             cout << lines.getEntry(i) << endl;
@@ -56,81 +99,38 @@ void editor::displayLines() {
         Position userPosition;
         placeCursorAt(userPosition);
     }
-    
+
 }
 
 void editor::run() {
     char command = '\0';
     bool endProgram = false;
     Position userPosition;
-   
+
     //Loop to process commands entered by user.
-    while(!endProgram)
+    while (!endProgram)
     {
-        getch(command); //Do we need getwch? Depends on compiler.
+         command = getch(); //Do we need getwch? Depends on compiler.
 
         //Switch to execute the appropriate code depending on command entered.
-        switch(command)
+        switch (command)
         {
-            case 'x':
-                deleteCurrentCharacter(userPosition);
-                displayLines(); //allows user to see change.
+        case 'x':
+            deleteCurrentCharacter(userPosition);
+            displayLines(); //allows user to see change.
             break;
-            case ':'
-                    //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
-                Position endOfFile (0, (lines.getLength() + 5) );
+        case ':':
+                //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
+                Position endOfFile(0, (lines.getLength() + 5));
 
-                    //Move cursor to bottom.
+                //Move cursor to bottom.
                 placeCursorAt(endOfFile);
-                
+
                 cout << ':';
-                
+
                 //Process the user's end-of-file commands ('w' or 'q').
-               endProgram = endOfFileCommand();
-            break;
+                endProgram = endOfFileCommand();
+                break;
         }
-}
-
-void editor::writeToFile()
-{
-    ifstream outfile;
-    outfile = ("test.txt");
-
-    //Loop to write each line to the output file.
-    for (int i = 1; i < numberOfLines + 1; i++)
-    {
-        outfile << lines.getEntry(i);
     }
-
-    outfile.close();
-}
-
-void editor::deleteCurrentCharacter(Position userPosition)
-{
-    string tempString = "";
-    int lineNumber = userPosition.getY();
-    int characterPosition = userPosition.getX();
-                
-    //delete current char.
-    tempString = lines.getEntry(lineNumber);
-    tempString.erase(characterPosition, 1);
-                
-    //Replace original string with altered string.
-    lines.replace(lineNumber, tempString);
-}
-
-bool editor::endOfFileCommand()
-{
-    bool endProgram = false;
-    getche(command);
-    
-    if (command == 'w')
-    {
-        writeToFile();
-    }
-    else if (command == 'q')
-         {
-            endProgram = true;
-         }
-    return endProgram;
 }
