@@ -6,6 +6,7 @@ November 8, 2021
 #include "LinkedList.h"
 #include<iostream>
 #include "position.h"
+#include <conio.h>
 
 using namespace std;
 
@@ -97,7 +98,7 @@ bool editor::endOfFileCommand()
 {
     char command;
     bool endProgram = false;
-    command = getch();
+    command = _getch();
 
 //editor.cpp Page 2
     
@@ -119,7 +120,7 @@ void editor::run() {
     //Loop to process commands entered by user.
     while (!endProgram)
     {
-         command = getch(); //Do we need getwch? Depends on compiler.
+         command = _getch(); //Do we need getwch? Depends on compiler.
 
         //Switch to execute the appropriate code depending on command entered.
         switch (command)
