@@ -33,27 +33,35 @@ void editor::moveUp() {
     }
     // else error
 }
-void editor::movedown() {
+void editor::moveDown() {
     if (userPosition.getY() < lines.getLength()) {
         userPosition.setY(userPosition.getY() + 1);
         //placecursorat(userPosition)
     }
     // else error
 }
-void editor::moveleft() {
+void editor::moveLeft() {
     if (userPosition.getX() > 0) {
         userPosition.setX(userPosition.getX() - 1);
         //placecursorat(userPosition)
     }
     // else error
 }
-void editor::moveright() {
+void editor::moveRight() {
     if (userPosition.getX() < lines.getLength()) {
         userPosition.setX(userPosition.getX() + 1);
         //placecursorat(userPosition)
     }
     // else error
 }
+
+void deleteCurrentLine()
+{
+    string currentLine = userposition.getY() + 1; //Need +1 because list Lines starts at 1 but coordinates in class Position start at 0? Not sure.
+    lines.remove(currentLine);
+    displayLines(); //Show change.
+}
+
 */
 editor::editor() {}
 editor::editor(string file) {
@@ -175,7 +183,7 @@ void editor::run() {
             command = _getch();
             if (command == 'd')
             {
-                //delete current line.
+                //deleteCurrentLine();
             }
             break;
         case ':':
