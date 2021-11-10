@@ -115,7 +115,6 @@ void editor::deleteCurrentCharacter(Position userPosition)
 
     //delete current char.
     tempString = lines.getEntry(lineNumber);
-    cout << tempString;
     tempString.erase(characterPosition, 1);
 
     //Replace original string with altered string.
