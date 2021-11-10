@@ -28,13 +28,31 @@ void placeCursorAt(Position coordinate) {
 /*
 void editor::moveUp() {
     if (userPosition.getY() > 0) {
-        userPosition.setY(userPosition.getY() + 1);
+        userPosition.setY(userPosition.getY() - 1);
+        //placecursorat()
     }
+    // else error
 }
 void editor::movedown() {
     if (userPosition.getY() < lines.getLength()) {
-        userPosition.setY(userPosition.getY() - 1);
+        userPosition.setY(userPosition.getY() + 1);
+        //placecursorat()
     }
+    // else error
+}
+void editor::moveleft() {
+    if (userPosition.getX() > 0) {
+        userPosition.setX(userPosition.getX() - 1);
+        //placecursorat()
+    }
+    // else error
+}
+void editor::moveright() {
+    if (userPosition.getX() < lines.getLength()) {
+        userPosition.setX(userPosition.getX() + 1);
+        //placecursorat()
+    }
+    // else error
 }
 */
 editor::editor() {}
