@@ -99,7 +99,7 @@ bool editor::endOfFileCommand()
     char command;
     bool endProgram = false;
     cout << "w to write to file \n q to quit\n";
-    command = _getch();
+    command = _getche();
     if (command == 'w')
     {
         writeToFile();
