@@ -84,7 +84,7 @@ void editor::deleteCurrentCharacter(Position userPosition)
 {
     string tempString = "";
     int lineNumber = userPosition.getY() + 1;
-    int characterPosition =  userPosition.getX() + 1 ;
+    int characterPosition =  userPosition.getX();
 
     //delete current char.
     tempString = lines.getEntry(lineNumber);
