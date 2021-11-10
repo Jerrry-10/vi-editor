@@ -19,7 +19,7 @@ class editor {
 
 private:
 	LinkedList<string> lines; //A list of lines of text.
-	
+	Position userPosition;
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
 	void writeToFile();
