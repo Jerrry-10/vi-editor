@@ -146,7 +146,7 @@ void editor::run() {
     //Loop to process commands entered by user.
     while (!endProgram)
     {
-         command = _getch(); //Do we need getwch? Depends on compiler.
+         command = _getch();
 
         //Switch to execute the appropriate code depending on command entered.
         switch (command)
@@ -156,11 +156,28 @@ void editor::run() {
             displayLines(); //allows user to see change.
             break;
         case 'j':
-                
-                break;
+            //case downArrow :   How do we implement arrows?
+                //moveDown();
+            break;
         case 'k':
-                
-        case: 'h'
+            //case upArrow :
+                //moveUp();
+            break;
+        case 'h':
+            //case leftArrow :
+                //moveLeft();
+            break;
+        case 'l':
+            //case rightArrow :
+                //moveRight();
+            break;
+        case 'd':
+            command = _getch();
+            if (command == 'd')
+            {
+                //delete current line.
+            }
+            break;
         case ':':
                 //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
                 Position endOfFile(0, (lines.getLength() + 5));
