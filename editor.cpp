@@ -29,28 +29,28 @@ void placeCursorAt(Position coordinate) {
 void editor::moveUp() {
     if (userPosition.getY() > 0) {
         userPosition.setY(userPosition.getY() - 1);
-        //placecursorat()
+        //placecursorat(userPoition)
     }
     // else error
 }
 void editor::movedown() {
     if (userPosition.getY() < lines.getLength()) {
         userPosition.setY(userPosition.getY() + 1);
-        //placecursorat()
+        //placecursorat(userPosition)
     }
     // else error
 }
 void editor::moveleft() {
     if (userPosition.getX() > 0) {
         userPosition.setX(userPosition.getX() - 1);
-        //placecursorat()
+        //placecursorat(userPosition)
     }
     // else error
 }
 void editor::moveright() {
     if (userPosition.getX() < lines.getLength()) {
         userPosition.setX(userPosition.getX() + 1);
-        //placecursorat()
+        //placecursorat(userPosition)
     }
     // else error
 }
@@ -155,6 +155,12 @@ void editor::run() {
             deleteCurrentCharacter(userPosition);
             displayLines(); //allows user to see change.
             break;
+        case 'j':
+                
+                break;
+        case 'k':
+                
+        case: 'h'
         case ':':
                 //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
                 Position endOfFile(0, (lines.getLength() + 5));
