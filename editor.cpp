@@ -139,7 +139,10 @@ void editor::run() {
                 cout << ':';
 
                 //Process the user's end-of-file commands ('w' or 'q').
-                endProgram = endOfFileCommand();
+                while(!endProgram)
+                {
+                    endProgram = endOfFileCommand();
+                }
                 break;
         }
     }
