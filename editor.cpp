@@ -25,7 +25,18 @@ void placeCursorAt(Position coordinate) {
         coord);
 
 }
-
+/*
+void editor::moveUp() {
+    if (userPosition.getY() > 0) {
+        userPosition.setY(userPosition.getY() + 1);
+    }
+}
+void editor::movedown() {
+    if (userPosition.getY() < lines.getLength()) {
+        userPosition.setY(userPosition.getY() - 1);
+    }
+}
+*/
 editor::editor() {}
 editor::editor(string file) {
 
