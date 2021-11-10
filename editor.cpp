@@ -98,12 +98,11 @@ bool editor::endOfFileCommand()
 {
     char command;
     bool endProgram = false;
-    cout << "w to write to file \n q to quit\n";
+ 
     command = _getche();
     if (command == 'w')
     {
         writeToFile();
-        cout << "wrote to file\n";
     }
     else if (command == 'q')
     {
