@@ -75,6 +75,7 @@ void editor::writeToFile()
     for (int i = 1; i < numberOfLines + 1; i++)
     {
         outfile << lines.getEntry(i);
+        outfile << endl;
     }
 
     outfile.close();
@@ -98,7 +99,7 @@ bool editor::endOfFileCommand()
 {
     char command;
     bool endProgram = false;
-    command = _getch();
+    command = _getche();
 
 //editor.cpp Page 2
     
