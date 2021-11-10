@@ -55,7 +55,7 @@ void editor::moveRight() {
     // else error
 }
 
-void deleteCurrentLine()
+void editor::deleteCurrentLine()
 {
     string currentLine = userposition.getY() + 1; //Need +1 because list Lines starts at 1 but coordinates in class Position start at 0? Not sure.
     lines.remove(currentLine);
