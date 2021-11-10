@@ -54,15 +54,12 @@ void editor::displayLines() {
 
     if (!lines.isEmpty()) {
         int numberOfLines = lines.getLength();
-
         for (int i = 1; i < numberOfLines + 1; i++)
         {
             cout << lines.getEntry(i) << endl;
-        }
-        Position userPosition;
+        }     
         placeCursorAt(userPosition);
     }
-
 }
 
 void editor::writeToFile()
@@ -85,27 +82,28 @@ void editor::deleteCurrentCharacter(Position userPosition)
 {
     string tempString = "";
     int lineNumber = userPosition.getY() + 1;
-    int characterPosition =  userPosition.getX();
+    int characterPosition = userPosition.getX();
 
     //delete current char.
     tempString = lines.getEntry(lineNumber);
+    cout << tempString;
     tempString.erase(characterPosition, 1);
 
     //Replace original string with altered string.
     lines.replace(lineNumber, tempString);
+    
 }
 
 bool editor::endOfFileCommand()
 {
     char command;
     bool endProgram = false;
-    command = _getche();
-
-//editor.cpp Page 2
-    
+    cout << "w to write to file \n q to quit\n";
+    command = _getch();
     if (command == 'w')
     {
         writeToFile();
+        cout << "wrote to file\n";
     }
     else if (command == 'q')
     {
@@ -113,6 +111,7 @@ bool editor::endOfFileCommand()
     }
     return endProgram;
 }
+
 void editor::run() {
     char command = '\0';
     bool endProgram = false;
