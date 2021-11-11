@@ -185,6 +185,7 @@ void editor::run() {
             {
                 //deleteCurrentLine();
             }
+            //else do nothing.
             break;
         case ':':
                 //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
