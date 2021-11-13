@@ -25,22 +25,29 @@ void placeCursorAt(Position coordinate) {
         coord);
 
 }
-/*
+
 void editor::moveUp() {
-    if (userPosition.getY() > 0) {
-        userPosition.setY(userPosition.getY() - 1);
-        //placecursorat(userPoition)
+    if (userPosition.getY() - 1 < 0) {
+  
     }
+    else if (userPosition.getY() != -1) {
+        userPosition.setY(userPosition.getY() - 1); // Sets the position to be 1 higher.
+    }
+    placeCursorAt(userPosition); //Places the cursor at the updated position
     // else error
 }
 void editor::moveDown() {
-    if (userPosition.getY() < lines.getLength()) {
-        userPosition.setY(userPosition.getY() + 1);
-        //placecursorat(userPosition)
+    if (userPosition.getY() + 2 > lines.getLength()) {
+
     }
-    // else error
+    else if (userPosition.getY() != -1) {
+        userPosition.setY(userPosition.getY() + 1);
+       
+    }
+   // cout << lines.getLength();
+    placeCursorAt(userPosition);
 }
-void editor::moveLeft() {
+/**void editor::moveLeft() {
     if (userPosition.getX() > 0) {
         userPosition.setX(userPosition.getX() - 1);
         //placecursorat(userPosition)
@@ -54,14 +61,12 @@ void editor::moveRight() {
     }
     // else error
 }
-
 void editor::deleteCurrentLine()
 {
     string currentLine = userposition.getY() + 1; //Need +1 because list Lines starts at 1 but coordinates in class Position start at 0? Not sure.
     lines.remove(currentLine);
     displayLines(); //Show change.
 }
-
 */
 editor::editor() {}
 editor::editor(string file) {
@@ -94,7 +99,8 @@ void editor::displayLines() {
         for (int i = 1; i < numberOfLines + 1; i++)
         {
             cout << lines.getEntry(i) << endl;
-        }     
+           
+        }
         placeCursorAt(userPosition);
     }
 }
@@ -127,14 +133,14 @@ void editor::deleteCurrentCharacter(Position userPosition)
 
     //Replace original string with altered string.
     lines.replace(lineNumber, tempString);
-    
+
 }
 
 bool editor::endOfFileCommand()
 {
     char command;
     bool endProgram = false;
- 
+
     command = _getche();
     if (command == 'w')
     {
@@ -154,7 +160,7 @@ void editor::run() {
     //Loop to process commands entered by user.
     while (!endProgram)
     {
-         command = _getch();
+        command = _getch();
 
         //Switch to execute the appropriate code depending on command entered.
         switch (command)
@@ -165,11 +171,13 @@ void editor::run() {
             break;
         case 'j':
             //case downArrow :   How do we implement arrows?
-                //moveDown();
+                moveDown();
+                
             break;
         case 'k':
             //case upArrow :
-                //moveUp();
+                moveUp();
+                
             break;
         case 'h':
             //case leftArrow :
@@ -188,20 +196,20 @@ void editor::run() {
             //else do nothing.
             break;
         case ':':
-                //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
-                Position endOfFile(0, (lines.getLength() + 5));
+            //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
+            Position endOfFile(0, (lines.getLength() + 5));
 
-                //Move cursor to bottom.
-                placeCursorAt(endOfFile);
+            //Move cursor to bottom.
+            placeCursorAt(endOfFile);
 
-                cout << ':';
+            cout << ':';
 
-                //Process the user's end-of-file commands ('w' or 'q').
-                while(!endProgram)
-                {
-                    endProgram = endOfFileCommand();
-                }
-                break;
+            //Process the user's end-of-file commands ('w' or 'q').
+            while (!endProgram)
+            {
+                endProgram = endOfFileCommand();
+            }
+            break;
         }
     }
 }

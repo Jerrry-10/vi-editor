@@ -20,20 +20,21 @@ class editor {
 private:
 	LinkedList<string> lines; //A list of lines of text.
 	Position userPosition;
+	
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
 	void writeToFile();
-	
+
 	/**Helper function to delete the character at the user's current position.
 	@param  userPosition  The current position of the user's cursor in the editor.
 	@post  The character at userPosition has been deleted. */
 	void deleteCurrentCharacter(Position userPosition);
-	
+
 	/**Helper function to read, echo, and execute user's end-of-program commands after ':'
 	@post  User's final commands have been executed. Invalid commands have been ignored.
 	@return  True if user has entered the command to quit the program and false otherwise. */
 	bool endOfFileCommand();
-	
+
 public:
 	/** Default Constructor.
 	@post  Instantiates empty Editor object.
@@ -46,24 +47,25 @@ public:
 	@post  Prints error message and terminates program if file cannot be opened.
 		Otherwise, each line in file becomes an item in the list lines. */
 	editor(string file);
-	
+
 	/**Function to print the contents of the LinkedList lines to the screen.
 	@post  Each entry in lines is printed to the screen on its own line. */
 	void displayLines();
-	
+
 	/**Function to read in user's commands as single characters and execute them.
 	@post  User's commands have been executed. */
 	void run();
 
 
-		/* Future methods
-		void moveUp();
-		void moveDown();
-		void moveLeft();
-		void moveRight();
-		void deleteCurrentLine();
-		void deleteChar(); //I think this one is redundant.
-		*/
+	// Future methods
+	void moveUp();
+	void moveDown();
+	/**
+	void moveLeft();
+	void moveRight();
+	void deleteCurrentLine();
+	void deleteChar(); //I think this one is redundant.
+	*/
 
 };
 
