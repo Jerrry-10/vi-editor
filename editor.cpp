@@ -47,20 +47,19 @@ void editor::moveDown() {
    // cout << lines.getLength();
     placeCursorAt(userPosition);
 }
-/**void editor::moveLeft() {
+void editor::moveLeft() {
     if (userPosition.getX() > 0) {
         userPosition.setX(userPosition.getX() - 1);
-        //placecursorat(userPosition)
     }
-    // else error
+  
+    placeCursorAt(userPosition); //Places the cursor at the updated position
 }
 void editor::moveRight() {
-    if (userPosition.getX() < lines.getLength()) {
-        userPosition.setX(userPosition.getX() + 1);
-        //placecursorat(userPosition)
+    if (userPosition.getX() >= 0) {
+        userPosition.setX(userPosition.getX() + 1);      
     }
-    // else error
-}
+    placeCursorAt(userPosition);
+}/*
 void editor::deleteCurrentLine()
 {
     string currentLine = userposition.getY() + 1; //Need +1 because list Lines starts at 1 but coordinates in class Position start at 0? Not sure.
@@ -181,11 +180,11 @@ void editor::run() {
             break;
         case 'h':
             //case leftArrow :
-                //moveLeft();
+                moveLeft();
             break;
         case 'l':
             //case rightArrow :
-                //moveRight();
+               moveRight();
             break;
         case 'd':
             command = _getch();

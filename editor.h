@@ -60,9 +60,10 @@ public:
 	// Future methods
 	void moveUp();
 	void moveDown();
-	/**
 	void moveLeft();
 	void moveRight();
+
+	/*
 	void deleteCurrentLine();
 	void deleteChar(); //I think this one is redundant.
 	*/
