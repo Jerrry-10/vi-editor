@@ -7,7 +7,10 @@ November 8, 2021
 #include<iostream>
 #include "position.h"
 #include <conio.h>
-
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 77
+#define KEY_RIGHT 75
 using namespace std;
 
 void placeCursorAt(Position coordinate) {
@@ -168,21 +171,21 @@ void editor::run() {
             deleteCurrentCharacter(userPosition);
             displayLines(); //allows user to see change.
             break;
-        case 'j':
+        case 'j': case KEY_DOWN:
             //case downArrow :   How do we implement arrows?
                 moveDown();
                 
             break;
-        case 'k':
+        case 'k': case KEY_UP:
             //case upArrow :
                 moveUp();
                 
             break;
-        case 'h':
+        case 'h': case KEY_RIGHT:
             //case leftArrow :
                 moveLeft();
             break;
-        case 'l':
+        case 'l': case KEY_LEFT:
             //case rightArrow :
                moveRight();
             break;
