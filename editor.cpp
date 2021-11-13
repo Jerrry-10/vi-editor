@@ -194,6 +194,14 @@ void editor::run() {
             }
             //else do nothing.
             break;
+        case 'q':
+            command = _getch();
+            if (command == '!') {
+                Position endOfFile(0, (lines.getLength() + 5));
+                placeCursorAt(endOfFile);
+                endProgram = true;
+            }
+            break;
         case ':':
             //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
             Position endOfFile(0, (lines.getLength() + 5));
