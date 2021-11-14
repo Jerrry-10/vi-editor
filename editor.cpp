@@ -58,7 +58,7 @@ void editor::moveLeft() {
     placeCursorAt(userPosition); //Places the cursor at the updated position
 }
 void editor::moveRight() {
-    if (userPosition.getX() >= 0) {
+    if (userPosition.getX() >= 0) { //THIS LINE IS FAULTY. x MUST NOT EXCEED MAXIMUM POSITION
         userPosition.setX(userPosition.getX() + 1);      
     }
     placeCursorAt(userPosition);
@@ -167,12 +167,12 @@ void editor::run() {
         //Switch to execute the appropriate code depending on command entered.
         switch (command)
         {
-        case 'x':
+        case 'x': //BUG. Does not work properly if you move the cursor first.
             deleteCurrentCharacter(userPosition);
             displayLines(); //allows user to see change.
             break;
         case 'j': case KEY_DOWN:
-            //case downArrow :   How do we implement arrows?
+            //case downArrow :
                 moveDown();
                 
             break;
@@ -197,7 +197,7 @@ void editor::run() {
             }
             //else do nothing.
             break;
-        case 'q':
+            case 'q': //BUG: It's supposed to be ':', THEN 'q'. We should do this in endOfFileCommand(), not here.
             command = _getch();
             if (command == '!') {
                 Position endOfFile(0, (lines.getLength() + 5));
