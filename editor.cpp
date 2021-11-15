@@ -58,7 +58,11 @@ void editor::moveLeft() {
     placeCursorAt(userPosition); //Places the cursor at the updated position
 }
 void editor::moveRight() {
-    if (userPosition.getX() >= 0) { //THIS LINE IS FAULTY. x MUST NOT EXCEED MAXIMUM POSITION
+    int len = lines.getEntry(userPosition.getY() + 1).length();
+    if (userPosition.getX() > len - 1) {
+
+    }
+    if (userPosition.getX() < len - 1) {
         userPosition.setX(userPosition.getX() + 1);      
     }
     placeCursorAt(userPosition);
@@ -98,11 +102,17 @@ void editor::displayLines() {
 
     if (!lines.isEmpty()) {
         int numberOfLines = lines.getLength();
+        int storex = userPosition.getX(), storey = userPosition.getY();
+        userPosition.setX(0);
+        userPosition.setY(0);
+        placeCursorAt(userPosition);
         for (int i = 1; i < numberOfLines + 1; i++)
         {
             cout << lines.getEntry(i) << endl;
            
         }
+        userPosition.setX(storex);
+        userPosition.setY(storey);
         placeCursorAt(userPosition);
     }
 }
@@ -136,6 +146,7 @@ void editor::deleteCurrentCharacter(Position userPosition)
     //Replace original string with altered string.
     lines.replace(lineNumber, tempString);
 
+    displayLines();
 }
 
 bool editor::endOfFileCommand()
@@ -167,12 +178,12 @@ void editor::run() {
         //Switch to execute the appropriate code depending on command entered.
         switch (command)
         {
-        case 'x': //BUG. Does not work properly if you move the cursor first.
+        case 'x':
             deleteCurrentCharacter(userPosition);
-            displayLines(); //allows user to see change.
+             //allows user to see change.
             break;
         case 'j': case KEY_DOWN:
-            //case downArrow :
+            //case downArrow :   How do we implement arrows?
                 moveDown();
                 
             break;
@@ -197,7 +208,7 @@ void editor::run() {
             }
             //else do nothing.
             break;
-            case 'q': //BUG: It's supposed to be ':', THEN 'q'. We should do this in endOfFileCommand(), not here.
+        case 'q':
             command = _getch();
             if (command == '!') {
                 Position endOfFile(0, (lines.getLength() + 5));
