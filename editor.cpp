@@ -66,14 +66,12 @@ void editor::moveRight() {
         userPosition.setX(userPosition.getX() + 1);      
     }
     placeCursorAt(userPosition);
-}/*
+}
 void editor::deleteCurrentLine()
 {
-    string currentLine = userposition.getY() + 1; //Need +1 because list Lines starts at 1 but coordinates in class Position start at 0? Not sure.
+    int currentLine = userPosition.getY() + 1; //Need +1 because list Lines starts at 1 but coordinates in class Position start at 0.
     lines.remove(currentLine);
-    displayLines(); //Show change.
 }
-*/
 editor::editor() {}
 editor::editor(string file) {
 
@@ -99,7 +97,7 @@ editor::editor(string file) {
 }
 
 void editor::displayLines() {
-
+    system("cls");
     if (!lines.isEmpty()) {
         int numberOfLines = lines.getLength();
         int storex = userPosition.getX(), storey = userPosition.getY();
@@ -116,7 +114,27 @@ void editor::displayLines() {
         placeCursorAt(userPosition);
     }
 }
-
+void editor::displayLines(bool dd) {
+    system("cls");
+    if (!lines.isEmpty()) {
+        int numberOfLines = lines.getLength();
+        int storex = userPosition.getX(), storey = userPosition.getY();
+        userPosition.setX(0);
+        userPosition.setY(0);
+        placeCursorAt(userPosition);
+        for (int i = 1; i < numberOfLines + 1; i++)
+        {
+            cout << lines.getEntry(i) << endl;
+            
+        }
+        if (dd == true) {
+            cout << '\b';
+        }
+        userPosition.setX(storex);
+        userPosition.setY(storey);
+        placeCursorAt(userPosition);
+    }
+}
 void editor::writeToFile()
 {
     ofstream outfile;
@@ -199,15 +217,7 @@ void editor::run() {
         case 'l': case KEY_LEFT:
             //case rightArrow :
                moveRight();
-            break;
-        case 'd':
-            command = _getch();
-            if (command == 'd')
-            {
-                //deleteCurrentLine();
-            }
-            //else do nothing.
-            break;
+            break;        
         case 'q':
             command = _getch();
             if (command == '!') {
@@ -215,6 +225,16 @@ void editor::run() {
                 placeCursorAt(endOfFile);
                 endProgram = true;
             }
+            break;
+        case 'd':
+            command = _getch();
+            if (command == 'd')
+            {
+                deleteCurrentLine();
+                displayLines();
+                //Tried using displayLines(); to show changes immediately, but it caused problems.
+            }
+            //else do nothing.
             break;
         case ':':
             //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
