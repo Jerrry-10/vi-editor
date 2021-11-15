@@ -51,7 +51,7 @@ public:
 	/**Function to print the contents of the LinkedList lines to the screen.
 	@post  Each entry in lines is printed to the screen on its own line. */
 	void displayLines();
-
+	void displayLines(bool dd);
 	/**Function to read in user's commands as single characters and execute them.
 	@post  User's commands have been executed. */
 	void run();
@@ -63,8 +63,9 @@ public:
 	void moveLeft();
 	void moveRight();
 
-	/*
+	
 	void deleteCurrentLine();
+	/**
 	void deleteChar(); //I think this one is redundant.
 	*/
 
