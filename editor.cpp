@@ -1,6 +1,6 @@
 /** @file  editor.cpp Page 1
 @author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
-November 8, 2021
+November 16, 2021
 */
 #include "editor.h"
 #include "LinkedList.h"
@@ -9,8 +9,8 @@ November 8, 2021
 #include <conio.h>
 #define KEY_UP 72
 #define KEY_DOWN 80
-#define KEY_LEFT 77
-#define KEY_RIGHT 75
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
 using namespace std;
 
 void placeCursorAt(Position coordinate) {
@@ -30,48 +30,78 @@ void placeCursorAt(Position coordinate) {
 }
 
 void editor::moveUp() {
-    if (userPosition.getY() - 1 < 0) {
-  
+    if (userPosition.getY() - 1 < 0) { //If out of bounds, do nothing.
+
     }
     else if (userPosition.getY() != -1) {
         userPosition.setY(userPosition.getY() - 1); // Sets the position to be 1 higher.
+    }
+    
+    /* If the old line is longer than the new line, then when cursor moves up, its x coordinate could be out of bounds
+    for the new line. If so, this if statement resets the x coordinate to the end of the new line. */
+    int length = lines.getEntry(userPosition.getY() + 1).length(); //get Length of current line
+    if (userPosition.getX() > length - 1) {
+        userPosition.setX(length - 1);
     }
     placeCursorAt(userPosition); //Places the cursor at the updated position
     // else error
 }
 void editor::moveDown() {
-    if (userPosition.getY() + 2 > lines.getLength()) {
+    if (userPosition.getY() + 2 > lines.getLength()) { //If out of bounds, do nothing.
 
     }
     else if (userPosition.getY() != -1) {
-        userPosition.setY(userPosition.getY() + 1);
-       
+        userPosition.setY(userPosition.getY() + 1); //Set position to be 1 lower.
+
     }
-   // cout << lines.getLength();
+
+    /* If the old line is longer than the new line, then when cursor moves down, its x coordinate could be out of bounds
+    for the new line. If so, this if statement resets the x coordinate to the end of the new line. */
+    int length = lines.getEntry(userPosition.getY() + 1).length(); //get Length of current line
+    if (userPosition.getX() > length - 1) {
+        userPosition.setX(length - 1);
+    }
+    // cout << lines.getLength();
     placeCursorAt(userPosition);
 }
 void editor::moveLeft() {
-    if (userPosition.getX() > 0) {
-        userPosition.setX(userPosition.getX() - 1);
+    if (userPosition.getX() > 0) { //Check for out of bounds
+        userPosition.setX(userPosition.getX() - 1); //Set position to be 1 to the left.
     }
-  
+
     placeCursorAt(userPosition); //Places the cursor at the updated position
 }
 void editor::moveRight() {
-    int len = lines.getEntry(userPosition.getY() + 1).length();
-    if (userPosition.getX() > len - 1) {
 
+    //get Length of current line
+    int length = lines.getEntry(userPosition.getY() + 1).length();
+    if (userPosition.getX() > length - 1) {
+        //If out of bounds, do nothing.
     }
-    if (userPosition.getX() < len - 1) {
-        userPosition.setX(userPosition.getX() + 1);      
+    if (userPosition.getX() < length - 1) {
+        userPosition.setX(userPosition.getX() + 1); //Set position to be 1 to the right.
     }
     placeCursorAt(userPosition);
 }
 void editor::deleteCurrentLine()
 {
     int currentLine = userPosition.getY() + 1; //Need +1 because list Lines starts at 1 but coordinates in class Position start at 0.
-    lines.remove(currentLine);
+    
+    lines.remove(currentLine); //Delete the line. Current line = next line.
+
+    //Get Length of new current line.
+    string thisLine = lines.getEntry(currentLine);
+    int length = thisLine.length();
+
+    /* If the line to delete was longer than the next line, then after deletion, cursor's x coordinate could be out of bounds
+    for the newly current line. If so, this if statement resets the x coordinate to the end of the line. */
+    if (userPosition.getX() > (length -1) ) //string indices and coordinates both begin at 0, not 1.
+    {
+        userPosition.setX(length -1);
+        placeCursorAt(userPosition);
+    }
 }
+
 editor::editor() {}
 editor::editor(string file) {
 
@@ -96,45 +126,35 @@ editor::editor(string file) {
     displayLines();
 }
 
+//Page 2
+
 void editor::displayLines() {
     system("cls");
+
     if (!lines.isEmpty()) {
         int numberOfLines = lines.getLength();
-        int storex = userPosition.getX(), storey = userPosition.getY();
+        
+        //Save cursor's position for future use.
+        int storeX = userPosition.getX(), storeY = userPosition.getY();
+
+        //Move cursor to beginning of text.
         userPosition.setX(0);
         userPosition.setY(0);
-        placeCursorAt(userPosition);
+
+        //Loop to print each line to console. Note that the first position in the LinkedList lines is 1, not 0.
         for (int i = 1; i < numberOfLines + 1; i++)
         {
             cout << lines.getEntry(i) << endl;
-           
+
         }
-        userPosition.setX(storex);
-        userPosition.setY(storey);
+
+        //Return cursor to original position.
+        userPosition.setX(storeX);
+        userPosition.setY(storeY);
         placeCursorAt(userPosition);
     }
 }
-void editor::displayLines(bool dd) {
-    system("cls");
-    if (!lines.isEmpty()) {
-        int numberOfLines = lines.getLength();
-        int storex = userPosition.getX(), storey = userPosition.getY();
-        userPosition.setX(0);
-        userPosition.setY(0);
-        placeCursorAt(userPosition);
-        for (int i = 1; i < numberOfLines + 1; i++)
-        {
-            cout << lines.getEntry(i) << endl;
-            
-        }
-        if (dd == true) {
-            cout << '\b';
-        }
-        userPosition.setX(storex);
-        userPosition.setY(storey);
-        placeCursorAt(userPosition);
-    }
-}
+
 void editor::writeToFile()
 {
     ofstream outfile;
@@ -163,30 +183,48 @@ void editor::deleteCurrentCharacter(Position userPosition)
 
     //Replace original string with altered string.
     lines.replace(lineNumber, tempString);
-
-    displayLines();
 }
 
 bool editor::endOfFileCommand()
 {
-    char command;
-    bool endProgram = false;
+    char command = '\0';
 
     command = _getche();
     if (command == 'w')
     {
         writeToFile();
+        changesWereMadeButNotSaved = false;
+        placeCursorAt(userPosition);
     }
     else if (command == 'q')
     {
-        endProgram = true;
+        if (!changesWereMadeButNotSaved) //Quits without :q! IF there are no unsaved changes.
+        {
+            endProgram = true;
+        }
+        else
+        {
+            cout << "\n\nChanges have NOT been saved. Enter :q! to quit anyway. Enter any other key to continue: ";
+            string nextCommand;
+            getline(cin >>ws, nextCommand);
+
+            if (nextCommand == ":q!")
+            {
+                endProgram = true;
+            }
+            else
+            {
+                placeCursorAt(userPosition);
+            }
+            
+        }
     }
+
     return endProgram;
 }
 
 void editor::run() {
     char command = '\0';
-    bool endProgram = false;
 
     //Loop to process commands entered by user.
     while (!endProgram)
@@ -198,41 +236,29 @@ void editor::run() {
         {
         case 'x':
             deleteCurrentCharacter(userPosition);
-             //allows user to see change.
+            changesWereMadeButNotSaved = true;
+            displayLines(); //Allows user to see change in real time.
             break;
         case 'j': case KEY_DOWN:
-            //case downArrow :   How do we implement arrows?
-                moveDown();
-                
+            moveDown();
             break;
         case 'k': case KEY_UP:
-            //case upArrow :
-                moveUp();
-                
+            moveUp();
             break;
-        case 'h': case KEY_RIGHT:
-            //case leftArrow :
-                moveLeft();
+        case 'h': case KEY_LEFT:
+            moveLeft();
             break;
-        case 'l': case KEY_LEFT:
-            //case rightArrow :
-               moveRight();
-            break;        
-        case 'q':
-            command = _getch();
-            if (command == '!') {
-                Position endOfFile(0, (lines.getLength() + 5));
-                placeCursorAt(endOfFile);
-                endProgram = true;
-            }
+        case 'l': case KEY_RIGHT:
+            moveRight();
             break;
         case 'd':
             command = _getch();
             if (command == 'd')
             {
                 deleteCurrentLine();
-                displayLines();
-                //Tried using displayLines(); to show changes immediately, but it caused problems.
+                changesWereMadeButNotSaved = true;
+                displayLines(); //Allows user to see change in real time.
+                
             }
             //else do nothing.
             break;
@@ -245,12 +271,11 @@ void editor::run() {
 
             cout << ':';
 
-            //Process the user's end-of-file commands ('w' or 'q').
-            while (!endProgram)
-            {
-                endProgram = endOfFileCommand();
-            }
+            //Process the user's end-of-file command ('w' or 'q').
+           
+            endProgram = endOfFileCommand();
             break;
-        }
-    }
+        
+        }//End switch
+    }//End while
 }

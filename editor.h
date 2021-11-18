@@ -1,7 +1,7 @@
 /**@file  editor.h Page 1
 Class to create and run a primitive text editor.
 @author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
-November 8, 2021
+November 16, 2021
 */
 #ifndef EDITOR_H_
 #define EDITOR_H_
@@ -20,7 +20,9 @@ class editor {
 private:
 	LinkedList<string> lines; //A list of lines of text.
 	Position userPosition;
-	
+	bool changesWereMadeButNotSaved = false;
+	bool endProgram = false;
+
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
 	void writeToFile();
@@ -51,23 +53,33 @@ public:
 	/**Function to print the contents of the LinkedList lines to the screen.
 	@post  Each entry in lines is printed to the screen on its own line. */
 	void displayLines();
-	void displayLines(bool dd);
+
 	/**Function to read in user's commands as single characters and execute them.
 	@post  User's commands have been executed. */
 	void run();
 
-
-	// Future methods
+	/**Method to move the cursor up one line.
+	@post  Does nothing if cursor is already at top of file. Otherwise, moves cursor up one line. */
 	void moveUp();
+
+	/**Method to move the cursor down one line.
+	@post  Does nothing if cursor is already at last line of file. Otherwise, moves cursor down one line. */
 	void moveDown();
+
+	/**Method to move the cursor left one space.
+	@post  Does nothing if cursor is already at start of line. Otherwise, moves cursor one space to the left. */
 	void moveLeft();
+
+	/**Method to move the cursor right one space.
+	@post  Does nothing if cursor is already on last character of line. Otherwise, moves the cursor right one space. */
 	void moveRight();
 
-	
+	/**Method to delete the current line of text from the editor.
+	@pre  cursor's position corresponds to a position on a valid line of text in the LinkedList lines.
+	@post  current line of text has been deleted. */
 	void deleteCurrentLine();
-	/**
-	void deleteChar(); //I think this one is redundant.
-	*/
+
+
 
 };
 
