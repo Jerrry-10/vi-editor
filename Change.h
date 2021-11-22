@@ -10,7 +10,7 @@ public:
     
     void setPositionOfDeletedContents(const Position& positionOfDeletedContents);
     
-    string getChangedCharacters() cosnt;
+    string getChangedCharacters() const;
     
     void setChangedCharacters(const string& changedCharacters);
 
