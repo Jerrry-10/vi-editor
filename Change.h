@@ -6,13 +6,11 @@ public:
     
     Change();
     
+    Change (const Position& positionOfDeletedContents, const string& changedCharacters);
+        
     Position getPositionOfDeletedContents() const;
     
-    void setPositionOfDeletedContents(const Position& positionOfDeletedContents);
-    
     string getChangedCharacters() const;
-    
-    void setChangedCharacters(const string& changedCharacters);
 
 private:
     string mChangedCharacters; //Can be a line or a single char?
