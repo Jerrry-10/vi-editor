@@ -6,7 +6,7 @@ public:
     
     Change();
     
-    Change (const Position& positionOfDeletedContents, const string& changedCharacters);
+    Change (const Position& positionOfDeletedContents, const string& changedCharacters, char command);
         
     Position getPositionOfDeletedContents() const;
     
