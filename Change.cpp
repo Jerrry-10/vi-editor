@@ -1,0 +1,2 @@
+#<include>
+using std::string
