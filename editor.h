@@ -53,6 +53,11 @@ public:
 	
 	void colorText(int value);
 
+	/**Function to undo the last change to the text.
+	@post  The last change is undone.
+	*/
+	void undoLastChange();
+	
 	/**Function to print the contents of the LinkedList lines to the screen.
 	@post  Each entry in lines is printed to the screen on its own line. */
 	void displayLines();
