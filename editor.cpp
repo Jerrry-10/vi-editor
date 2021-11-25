@@ -14,6 +14,18 @@ November 16, 2021
 #define KEY_RIGHT 77
 using namespace std;
 
+void colorText(int value) {
+
+	COORD coord;
+
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	FlushConsoleInputBuffer(hConsole);
+
+	SetConsoleTextAttribute(hConsole, value + 240);
+
+}
+
 void placeCursorAt(Position coordinate) {
 
     COORD coord;
