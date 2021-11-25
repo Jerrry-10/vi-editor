@@ -22,6 +22,7 @@ private:
 	Position userPosition;
 	bool changesWereMadeButNotSaved = false;
 	bool endProgram = false;
+	LinkedStack<Change> stackOfChanges;
 
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
