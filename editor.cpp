@@ -2,7 +2,6 @@
 @author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
 November 16, 2021
 */
-#include "LinkedStack.h"
 #include "editor.h"
 #include "LinkedList.h"
 #include<iostream>
