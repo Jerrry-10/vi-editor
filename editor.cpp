@@ -141,7 +141,7 @@ editor::editor(string file) {
 
 //Page 2
 
-void editor::displayLines() {
+void editor::displayLines() { //Iteration 2 version
     system("cls");
 
     if (!lines.isEmpty()) {
@@ -167,6 +167,50 @@ void editor::displayLines() {
         placeCursorAt(userPosition);
     }
 }
+
+/* Iteration 3 version
+
+void Editor::displayLines()
+{
+int position;
+string nextLine, nextWord, line;
+
+
+// goes through each line in the linked list 
+for (position = 1; position <= lines.getLength(); position++)
+{
+  nextLine = lines.getEntry(position);
+
+  int i = 0;
+  while (i < nextLine.length()) {
+    string word;
+    // isolate a word at a time (can contain underscores)
+    if (isalpha(nextLine[i])) {
+      while (isalpha(nextLine[i])|| nextLine[i]=='_') {
+        word += nextLine[i];
+        i++;
+      }
+      if (binarySearch(keyWords, 0, numKeywords-1, word) != -1)  //found
+          colorText(1);
+      else
+          colorText(0);
+      cout << word;
+   }
+
+   else {
+      colorText(0);
+      cout << nextLine[i];
+      i++;
+   }
+
+ }
+
+  cout << endl;
+ }
+ placeCursorAt(uPos);
+} // end displayLines
+
+*/
 
 void editor::writeToFile()
 {
