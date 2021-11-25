@@ -1,3 +1,6 @@
+#ifndef CHANGE_H
+#define CHANGE_H
+
 #include "Position.h"
 using std::string
 
@@ -24,3 +27,5 @@ using std::string
       int mLineNumber;
 	    char mCommand; //'x' or 'd'
 	}
+
+#endif
