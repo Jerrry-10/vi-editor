@@ -2,6 +2,7 @@
 @author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
 November 16, 2021
 */
+#include "LinkedStack.h"
 #include "editor.h"
 #include "LinkedList.h"
 #include<iostream>
@@ -262,6 +263,8 @@ void editor::run() {
             }
             //else do nothing.
             break;
+        case 'u':
+                //undo
         case ':':
             //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
             Position endOfFile(0, (lines.getLength() + 5));
