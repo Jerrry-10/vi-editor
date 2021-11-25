@@ -49,6 +49,8 @@ public:
 	@post  Prints error message and terminates program if file cannot be opened.
 		Otherwise, each line in file becomes an item in the list lines. */
 	editor(string file);
+	
+	void colorText(int value);
 
 	/**Function to print the contents of the LinkedList lines to the screen.
 	@post  Each entry in lines is printed to the screen on its own line. */
