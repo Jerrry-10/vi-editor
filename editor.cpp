@@ -213,7 +213,16 @@ for (position = 1; position <= lines.getLength(); position++)
 
 void undoLastChange()
 {
+    if ( !stackOfChanges.isEmpty(); )
+    {
+	//Get most recent change.
+	Change toBeUndone = stackOfChanges.peek();
+	stackOfChanges.pop();
+	    
 	
+	//Work in progress. Restore toBeUndone.
+	    
+    }	//else: do nothing
 }
 
 void editor::writeToFile()
