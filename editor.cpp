@@ -211,6 +211,11 @@ for (position = 1; position <= lines.getLength(); position++)
 
 */
 
+void undoLastChange()
+{
+	
+}
+
 void editor::writeToFile()
 {
     ofstream outfile;
