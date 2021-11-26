@@ -220,7 +220,7 @@ void undoLastChange()
 	stackOfChanges.pop();
 	    
 	
-	//Work in progress. Restore toBeUndone.
+	//Work in progress. Restore toBeUndone.mChangedCharacters
 	    
     }	//else: do nothing
 }
