@@ -24,8 +24,14 @@ using std::string
 	    */
 	    Position getPositionOfDeletedContents() const;
 	    
+	    /**Accessor for mChangedCharacters.
+	    @return  the value ofmChangedCharacters.
+	    */
 	    string getChangedCharacters() const;
 	    
+	    /**Accessor for mCommand.
+	    @return  The value of mCommand.
+	    */
 	    char getCommand() const;
 	    
 	    /**Accessor for mLineNumber.
@@ -35,7 +41,7 @@ using std::string
 	
 
 	private:
-	    string mChangedCharacters; //Can be a line or a single char?
+	    string mChangedCharacters; //Can be a line or a single char.
 	    Position mPositionOfDeletedContents;
       	    int mLineNumber;
 	    char mCommand; //'x' or 'd'
