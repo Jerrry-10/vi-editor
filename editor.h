@@ -55,7 +55,7 @@ public:
 	void colorText(int value);
 
 	/**Function to undo the last change to the text.
-	@post  The last change is undone.
+	@post  The last change is undone. If no changes were made, does nothing.
 	*/
 	void undoLastChange();
 	
