@@ -114,7 +114,9 @@ void editor::deleteCurrentLine()
     }
 }
 
-editor::editor() {}
+editor::editor() {
+	//initializeArray();
+}
 editor::editor(string file) {
 
     //   cout << "File: " << file << endl;
@@ -125,6 +127,8 @@ editor::editor(string file) {
         exit(1);
     }
     else {
+	    
+	//initializeArray();
         string line;
         int lineNumber = 1;
         while (!in.eof()) {
@@ -137,6 +141,8 @@ editor::editor(string file) {
     in.close();
     displayLines();
 }
+
+// void initializeArray();
 
 //Page 2
 
