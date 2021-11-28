@@ -24,6 +24,7 @@ private:
 	bool changesWereMadeButNotSaved = false;
 	bool endProgram = false;
 	LinkedStack<Change> stackOfChanges;
+	string keywords [];
 
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
