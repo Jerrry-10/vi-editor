@@ -313,7 +313,7 @@ void editor::run() {
         case 'x':
             //copy data and push to stack before deleting.
 	    string currentLine = ( userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
-	    Change newDeletion (userPosition, toBeDeleted, command);
+	    Change newDeletion (userPosition, toBeDeleted, command, currentLine);
 	    bool success = stackOfChanges.push(newDeletion);
 	    if (!success)
 	    {
