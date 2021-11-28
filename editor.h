@@ -12,6 +12,7 @@ November 16, 2021
 #include<windows.h>
 #include<fstream>
 #include<string>
+#include "Change.h"
 #include<memory>
 #include<conio.h>
 using namespace std;
