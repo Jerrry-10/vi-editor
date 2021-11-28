@@ -8,16 +8,29 @@ using std::string
 	{
 	public:
 	    
+	    //Default Constructor.
 	    Change();
 	    
+	    /** Constructor.
+	    @param positionOfDeletedContents  The position in the text where the deleted contents were located.
+	    @param changedCharacters  The single character OR line of text deleted.
+	    @param command  The command entered by the user. Either 'x' to delete a single char or 'd' to delete a line.
+	    @post  Object is constructed.
+	    */
 	    Change (const Position& positionOfDeletedContents, const string& changedCharacters, char command);
 	        
+	    /**Accessor for mPositionOfDeletedContents.
+	    @return  The value of mPositionOfDeletedContents.
+	    */
 	    Position getPositionOfDeletedContents() const;
 	    
 	    string getChangedCharacters() const;
 	    
 	    char getCommand() const;
-
+	    
+	    /**Accessor for mLineNumber.
+	    @return  the value of mLineNumber,
+	    */
       	    int getLineNumber() const;
 	
 
