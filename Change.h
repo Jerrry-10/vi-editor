@@ -45,6 +45,6 @@ using std::string
 	    Position mPositionOfDeletedContents;
       	    int mLineNumber;
 	    char mCommand; //'x' or 'd'
-	}
+	};
 
 #endif
