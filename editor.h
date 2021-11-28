@@ -24,7 +24,6 @@ private:
 	bool changesWereMadeButNotSaved = false;
 	bool endProgram = false;
 	LinkedStack<Change> stackOfChanges;
-	//string keywords [?]
 
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
@@ -39,10 +38,6 @@ private:
 	@post  User's final commands have been executed. Invalid commands have been ignored.
 	@return  True if user has entered the command to quit the program and false otherwise. */
 	bool endOfFileCommand();
-	
-	/**Helper function to initialize an array.
-	*/
-	void initializeArray();
 
 public:
 	/** Default Constructor.
