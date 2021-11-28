@@ -4,7 +4,7 @@ Change::Change()
 {}
 
 Change::Change (const Position& positionOfDeletedContents, const string& changedCharacters, char command)
-:mPositionOfDeletedContents(positionOfDeletedContents), mChangedCharacters(changedCharacters), mCommand(command)
+:mPositionOfDeletedContents(positionOfDeletedContents), mChangedCharacters(changedCharacters), mCommand(command), mLineNumber(lineNumber)
 {}
 
 Position Change::getPositionOfDeletedContents() const
