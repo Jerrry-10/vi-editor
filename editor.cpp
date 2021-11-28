@@ -219,7 +219,7 @@ for (position = 1; position <= lines.getLength(); position++)
 
 void undoLastChange()
 {
-    if ( !stackOfChanges.isEmpty(); )	//else: Do nothing.
+    if ( !stackOfChanges.isEmpty() )	//else: Do nothing.
     {
 	//Get most recent change.
 	Change toBeUndone = stackOfChanges.peek();
