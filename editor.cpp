@@ -213,16 +213,22 @@ for (position = 1; position <= lines.getLength(); position++)
 
 void undoLastChange()
 {
-    if ( !stackOfChanges.isEmpty(); )
+    if ( !stackOfChanges.isEmpty(); )	//else: Do nothing.
     {
 	//Get most recent change.
 	Change toBeUndone = stackOfChanges.peek();
 	stackOfChanges.pop();
-	    
 	
 	//Work in progress. Restore toBeUndone.mChangedCharacters
-	    
-    }	//else: do nothing
+	if (toBeUndone.mCommand == 'x')
+	{
+		
+	}
+	else if (toBeUndone.mCommand == 'd')
+	{
+		
+	}	//end inner if/else    
+    } 	//end outer if 
 }
 
 void editor::writeToFile()
@@ -305,7 +311,9 @@ void editor::run() {
         switch (command)
         {
         case 'x':
-            deleteCurrentCharacter(userPosition);
+            //copy data and push to stack before deleting.
+			
+	    deleteCurrentCharacter(userPosition);
             changesWereMadeButNotSaved = true;
             displayLines(); //Allows user to see change in real time.
             break;
@@ -325,6 +333,8 @@ void editor::run() {
             command = _getch();
             if (command == 'd')
             {
+		//copy data and push to stack before deleting.
+		    
                 deleteCurrentLine();
                 changesWereMadeButNotSaved = true;
                 displayLines(); //Allows user to see change in real time.
