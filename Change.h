@@ -17,7 +17,7 @@ using std::string
 	    @param command  The command entered by the user. Either 'x' to delete a single char or 'd' to delete a line.
 	    @post  Object is constructed.
 	    */
-	    Change (const Position& positionOfDeletedContents, const string& changedCharacters, char command);
+	    Change (const Position& positionOfDeletedContents, const string& changedCharacters, char command, int mLineNumber);
 	        
 	    /**Accessor for mPositionOfDeletedContents.
 	    @return  The value of mPositionOfDeletedContents.
