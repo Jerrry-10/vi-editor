@@ -42,7 +42,7 @@ private:
 
 public:
 	/** Default Constructor.
-	@post  Instantiates empty Editor object.
+	@post  Instantiates empty Editor object with no text.
 	*/
 	editor();
 
