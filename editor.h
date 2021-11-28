@@ -6,8 +6,8 @@ November 16, 2021
 #ifndef EDITOR_H_
 #define EDITOR_H_
 
-#include "LinkedList.h"
 #include "LinkedStack.h"
+#include "LinkedList.h"
 #include "position.h"
 #include<windows.h>
 #include<fstream>

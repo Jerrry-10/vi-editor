@@ -2,7 +2,8 @@
 #define CHANGE_H
 
 #include "Position.h"
-using std::string
+#include <string>
+using std::string;
 
 	class Change
 	{
@@ -43,7 +44,7 @@ using std::string
 	private:
 	    string mChangedCharacters; //Can be a line or a single char.
 	    Position mPositionOfDeletedContents;
-      	    int mLineNumber;
+      	int mLineNumber;
 	    char mCommand; //'x' or 'd'
 	};
 

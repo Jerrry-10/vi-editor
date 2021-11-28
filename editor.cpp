@@ -3,10 +3,12 @@
 November 16, 2021
 */
 #include "editor.h"
+#include "LinkedStack.h"
 #include "LinkedList.h"
 #include<iostream>
 #include "position.h"
 #include <conio.h>
+
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_LEFT 75
@@ -217,20 +219,20 @@ for (position = 1; position <= lines.getLength(); position++)
 
 */
 
-void undoLastChange()
+void editor::undoLastChange()
 {
-    if ( !stackOfChanges.isEmpty() )	//else: Do nothing.
+    if (!stackOfChanges.isEmpty() )	//else: Do nothing.
     {
 	//Get most recent change.
 	Change toBeUndone = stackOfChanges.peek();
 	stackOfChanges.pop();
 	
 	//Work in progress. Restore toBeUndone.mChangedCharacters
-	if (toBeUndone.mCommand == 'x')
+	if (toBeUndone.getCommand() == 'x')
 	{
 		
 	}
-	else if (toBeUndone.mCommand == 'd')
+	else if (toBeUndone.getCommand() == 'd')
 	{
 		
 	}	//end inner if/else    
@@ -307,6 +309,7 @@ bool editor::endOfFileCommand()
 
 void editor::run() {
     char command = '\0';
+    int currentLineNumber = 1;
 
     //Loop to process commands entered by user.
     while (!endProgram)
@@ -318,10 +321,10 @@ void editor::run() {
         {
         case 'x':
             //copy data and push to stack before deleting.
-	    string currentLine = ( userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
-	    Change newDeletion (userPosition, toBeDeleted, command, currentLine);
-	    bool success = stackOfChanges.push(newDeletion);
-	    if (!success)
+	    currentLineNumber = ( userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
+	    //Change newDeletion (userPosition, toBeDeleted, command, currentLineNumber);
+	    //bool success = stackOfChanges.push(newDeletion);
+	    //if (!success)
 	    {
 		    //end program?
 	    }

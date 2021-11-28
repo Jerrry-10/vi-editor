@@ -1,10 +1,11 @@
 #include "Change.h"
+using std::string;
 
 Change::Change()
 {}
 
 Change::Change (const Position& positionOfDeletedContents, const string& changedCharacters, char command, int lineNumber)
-:mPositionOfDeletedContents(positionOfDeletedContents), mChangedCharacters(changedCharacters), mCommand(command), mLineNumber(lineNumber)
+    :mPositionOfDeletedContents(positionOfDeletedContents), mChangedCharacters(changedCharacters), mCommand(command), mLineNumber(lineNumber)
 {}
 
 Position Change::getPositionOfDeletedContents() const
@@ -12,7 +13,7 @@ Position Change::getPositionOfDeletedContents() const
   return mPositionOfDeletedContents;
 }
 
-string Change::getChangedCharacters() const
+std::string Change::getChangedCharacters() const
 {
   return mChangedCharacters;
 }  
