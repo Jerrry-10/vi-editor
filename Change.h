@@ -18,13 +18,13 @@ using std::string
 	    
 	    char getCommand() const;
 
-      int getLineNumber() const;
+      	    int getLineNumber() const;
 	
 
 	private:
 	    string mChangedCharacters; //Can be a line or a single char?
 	    Position mPositionOfDeletedContents;
-      int mLineNumber;
+      	    int mLineNumber;
 	    char mCommand; //'x' or 'd'
 	}
 
