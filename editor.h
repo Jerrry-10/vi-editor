@@ -52,8 +52,6 @@ public:
 	@post  Prints error message and terminates program if file cannot be opened.
 		Otherwise, each line in file becomes an item in the list lines. */
 	editor(string file);
-	
-	void colorText(int value);
 
 	/**Function to undo the last change to the text.
 	@post  The last change is undone. If no changes were made, does nothing.
@@ -129,5 +127,6 @@ int binarySearch(const int anArray[], int first, int last, int target);
 template<class ItemType>
 void bubbleSort(ItemType theArray[], int n);
 
+void colorText(int value);
 
 #endif 
