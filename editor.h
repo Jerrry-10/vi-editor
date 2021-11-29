@@ -21,7 +21,7 @@ class editor {
 
 private:
 	
-	const int MAX_ARRAY = 
+	const int MAX_ARRAY = 60;
 	
 	LinkedList<string> lines; //A list of lines of text.
 	Position userPosition;
