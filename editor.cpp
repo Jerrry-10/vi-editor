@@ -15,6 +15,88 @@ November 16, 2021
 #define KEY_RIGHT 77
 using namespace std;
 
+//Nonmember Functions used by class Editor:
+
+//  Created by Frank M. Carrano and Timothy M. Henry.
+//  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
+
+/** Searches the array anArray[first] through anArray[last]
+    for a given value by using a binary search.
+ @pre  0 <= first, last <= SIZE - 1, where SIZE is the
+    maximum size of the array, and anArray[first] <=
+    anArray[first + 1] <= ... <= anArray[last].
+ @post  anArray is unchanged and either anArray[index] contains
+    the given value or index == -1.
+ @param anArray  The array to search.
+ @param first  The low index to start searching from.
+ @param last  The high index to stop searching at.
+ @param target  The search key.
+ @return  Either index, such that anArray[index] == target, or -1.
+*/
+int binarySearch(const int anArray[], int first, int last, int target)
+{
+   int index;
+   if (first > last)
+      index = -1; // target not in original array
+   else
+   {
+      // If target is in anArray, anArray[first] <= target <= anArray[last]
+      int mid = first + (last - first) / 2;
+      if (target == anArray[mid])
+         index = mid; // target found at anArray[mid]
+      else if (target < anArray[mid])
+         // Point X
+         index = binarySearch(anArray, first, mid - 1, target);
+      else
+         // Point Y
+         index = binarySearch(anArray, mid + 1, last, target);
+   }  // end if
+   
+   return index;
+}  // end binarySearch
+
+//  Created by Frank M. Carrano and Tim Henry.
+//  Copyright (c) 2016 __Pearson Education__. All rights reserved.
+
+// Listing 11-2.
+
+//#include <iostream>
+//#include <string>
+
+/** Sorts the items in an array into ascending order.
+ @pre  None.
+ @post  theArray is sorted into ascending order; n is unchanged.
+ @param theArray  The given array.
+ @param n  The size of theArray. */
+template<class ItemType>
+void bubbleSort(ItemType theArray[], int n)
+{
+   bool sorted = false; // False when swaps occur
+   int pass = 1;
+   while (!sorted && (pass < n))
+   {
+      // At this point, theArray[n+1-pass..n-1] is sorted
+      // and all of its entries are > the entries in theArray[0..n-pass]
+      sorted = true; // Assume sorted
+      for (int index = 0; index < n - pass; index++)
+      {
+         // At this point, all entries in theArray[0..index-1]
+         // are <= theArray[index]
+         int nextIndex = index + 1;
+         if (theArray[index] > theArray[nextIndex])
+         {
+            // Exchange entries
+            std::swap(theArray[index], theArray[nextIndex]);
+            sorted = false; // Signal exchange
+         } // end if
+      }  // end for
+      // Assertion: theArray[0..n-pass-1] < theArray[n-pass]
+      
+      pass++;
+   }  // end while
+}  // end bubbleSort
+
+
 void colorText(int value) {
 
 	COORD coord;
@@ -42,6 +124,8 @@ void placeCursorAt(Position coordinate) {
         coord);
 
 }
+
+// Member functions of class Editor:
 
 void editor::moveUp() {
     if (userPosition.getY() - 1 < 0) { //If out of bounds, do nothing.
@@ -379,84 +463,3 @@ void editor::run() {
         }//End switch
     }//End while
 }
-
-//Nonmember Functions used by class Editor:
-
-//  Created by Frank M. Carrano and Timothy M. Henry.
-//  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
-
-/** Searches the array anArray[first] through anArray[last]
-    for a given value by using a binary search.
- @pre  0 <= first, last <= SIZE - 1, where SIZE is the
-    maximum size of the array, and anArray[first] <=
-    anArray[first + 1] <= ... <= anArray[last].
- @post  anArray is unchanged and either anArray[index] contains
-    the given value or index == -1.
- @param anArray  The array to search.
- @param first  The low index to start searching from.
- @param last  The high index to stop searching at.
- @param target  The search key.
- @return  Either index, such that anArray[index] == target, or -1.
-*/
-int binarySearch(const int anArray[], int first, int last, int target)
-{
-   int index;
-   if (first > last)
-      index = -1; // target not in original array
-   else
-   {
-      // If target is in anArray, anArray[first] <= target <= anArray[last]
-      int mid = first + (last - first) / 2;
-      if (target == anArray[mid])
-         index = mid; // target found at anArray[mid]
-      else if (target < anArray[mid])
-         // Point X
-         index = binarySearch(anArray, first, mid - 1, target);
-      else
-         // Point Y
-         index = binarySearch(anArray, mid + 1, last, target);
-   }  // end if
-   
-   return index;
-}  // end binarySearch
-
-//  Created by Frank M. Carrano and Tim Henry.
-//  Copyright (c) 2016 __Pearson Education__. All rights reserved.
-
-// Listing 11-2.
-
-//#include <iostream>
-//#include <string>
-
-/** Sorts the items in an array into ascending order.
- @pre  None.
- @post  theArray is sorted into ascending order; n is unchanged.
- @param theArray  The given array.
- @param n  The size of theArray. */
-template<class ItemType>
-void bubbleSort(ItemType theArray[], int n)
-{
-   bool sorted = false; // False when swaps occur
-   int pass = 1;
-   while (!sorted && (pass < n))
-   {
-      // At this point, theArray[n+1-pass..n-1] is sorted
-      // and all of its entries are > the entries in theArray[0..n-pass]
-      sorted = true; // Assume sorted
-      for (int index = 0; index < n - pass; index++)
-      {
-         // At this point, all entries in theArray[0..index-1]
-         // are <= theArray[index]
-         int nextIndex = index + 1;
-         if (theArray[index] > theArray[nextIndex])
-         {
-            // Exchange entries
-            std::swap(theArray[index], theArray[nextIndex]);
-            sorted = false; // Signal exchange
-         } // end if
-      }  // end for
-      // Assertion: theArray[0..n-pass-1] < theArray[n-pass]
-      
-      pass++;
-   }  // end while
-}  // end bubbleSort
