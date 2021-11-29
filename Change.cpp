@@ -27,3 +27,23 @@ int Change::getLineNumber() const
 {
   return mLineNumber;
 }
+
+void Change::setPositionOfDeletedContents(const Position& positionOfDeletedContents)
+{
+    mPositionOfDeletedContents = positionOfDeletedContents;
+}
+
+void Change::setChangedCharacters(const string& changedCharacters)
+{
+    mChangedCharacters = changedCharacters;
+}
+
+void Change::setCommand(char command)
+{
+    mCommand = command;
+}
+
+void Change::setLineNumber(int lineNumber)
+{
+    mLineNumber = lineNumber;
+}

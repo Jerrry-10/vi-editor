@@ -9,7 +9,7 @@ using std::string;
 	{
 	public:
 	    
-	    //Default Constructor.
+	    //Default Constructor. See default values in private section.
 	    Change();
 	    
 	    /** Constructor.
@@ -38,14 +38,42 @@ using std::string;
 	    /**Accessor for mLineNumber.
 	    @return  the value of mLineNumber,
 	    */
-      	    int getLineNumber() const;
-	
+      	int getLineNumber() const;
+
+		//The following mutators are only recommended for use on Change objects which have been instantiated with
+		//dummy values by the default constructor. Objects which have given real values at instantiation should generally
+		//NOT have their attributes reset.
+
+		/**Mutator for mPositionOfDeletedContents
+		@param positionOfDeletedContents  The Position where the deleted contents were located.
+		@post  mPositionOfDeletedContents = positionOfDeletedContents
+		*/
+		void setPositionOfDeletedContents(const Position& positionOfDeletedContents);
+
+		/**Mutator for mChangedCharacters
+		@param changedCharacters  The string or character which has been deleted.
+		@post  mChangedCharacters = changedCharacters
+		*/
+		void setChangedCharacters(const string& changedCharacters);
+
+		/**Mutator for mCommand
+		@param command  The command entered by the user.
+		@post  mCommand = command
+		*/
+		void setCommand(char command);
+
+		/**Mutator for mLineNumber.
+		@param lineNumber  The number of the line which was deleted or altered.
+		@post  mLineNumber = lineNumber
+		*/
+		void setLineNumber(int lineNumber);
+
 
 	private:
-	    string mChangedCharacters; //Can be a line or a single char.
-	    Position mPositionOfDeletedContents;
-      	int mLineNumber;
-	    char mCommand; //'x' or 'd'
+	    string mChangedCharacters = ""; //Can be a line or a single char.
+	    Position mPositionOfDeletedContents; //default position is (0,0) See Position.cpp
+      	int mLineNumber = 1;
+	    char mCommand = 'x'; //'x' or 'd'
 	};
 
 #endif

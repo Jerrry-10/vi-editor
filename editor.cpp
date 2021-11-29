@@ -19,6 +19,7 @@ using namespace std;
 
 //  Created by Frank M. Carrano and Timothy M. Henry.
 //  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
+//Authors' original comment section moved to function protoype in header file.
 
 template<class ItemType>
 int binarySearch(const ItemType anArray[], int first, int last, ItemType target)
@@ -47,6 +48,7 @@ int binarySearch(const ItemType anArray[], int first, int last, ItemType target)
 //  Copyright (c) 2016 __Pearson Education__. All rights reserved.
 
 // Listing 11-2.
+//Authors' original comment section moved to function protoype in header file.
 
 //#include <iostream>
 //#include <string>
@@ -219,8 +221,8 @@ editor::editor(string file) {
     }
     else {
 	    
-	initializeArray(keywords, MAX_ARRAY);
-	bubbleSort(keywords, MAX_ARRAY);
+	    initializeArray(keywords, MAX_ARRAY);
+	    bubbleSort(keywords, MAX_ARRAY);
         string line;
         int lineNumber = 1;
         while (!in.eof()) {
@@ -273,7 +275,6 @@ void editor::displayLines()
 int position;
 string nextLine, nextWord, line;
 
-
 // goes through each line in the linked list 
 for (position = 1; position <= lines.getLength(); position++)
 {
@@ -311,23 +312,40 @@ for (position = 1; position <= lines.getLength(); position++)
 
 void editor::undoLastChange()
 {
+    string textToBeRestored = "";
+
     if (!stackOfChanges.isEmpty() )	//else: Do nothing.
     {
 	//Get most recent change.
 	Change changeToBeUndone = stackOfChanges.peek();
 	stackOfChanges.pop();
 	
-	//Work in progress. Restore toBeUndone.mChangedCharacters
-	if (changeToBeUndone.getCommand() == 'x')
-	{
-	     
-	}
-	else if (changeToBeUndone.getCommand() == 'd')
-	{
-		
-	}	//end inner if/else    
+	    //Work in progress. Restore toBeUndone.mChangedCharacters
+	    if (changeToBeUndone.getCommand() == 'x')
+	    {
+            //undo x
+            textToBeRestored = changeToBeUndone.getChangedCharacters();
+
+
+
+            changesWereMadeButNotSaved = true;
+	    }
+        else if (changeToBeUndone.getCommand() == 'd')
+        {
+            //undo dd
+            textToBeRestored = changeToBeUndone.getChangedCharacters();
+            
+            
+            
+            changesWereMadeButNotSaved = true;
+        }
+        else
+        {
+            cerr << "Error. Invalid change was popped onto stack.\n\n";
+            exit(2);
+        }   //end inner if/else  
     } 	//end outer if 
-}
+}//end undoLastChange
 
 void editor::writeToFile()
 {
@@ -400,6 +418,13 @@ bool editor::endOfFileCommand()
 void editor::run() {
     char command = '\0';
     int currentLineNumber = 1;
+    string toBeDeleted = "";
+    string currentLine = "";
+    int indexInString = 0;
+    bool success = true;
+    Position startOfText();     //(0,0) is default value. See Position.cpp
+    
+    Change newDeletion();
 
     //Loop to process commands entered by user.
     while (!endProgram)
@@ -410,17 +435,32 @@ void editor::run() {
         switch (command)
         {
         case 'x':
-            //copy data and push to stack before deleting.
+            //copy data to push onto stack.
 	    currentLineNumber = ( userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
-	    //Change newDeletion (userPosition, toBeDeleted, command, currentLineNumber);
-	    //bool success = stackOfChanges.push(newDeletion);
-	    //if (!success)
+        currentLine = lines.getEntry(currentLineNumber);
+        indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
+        toBeDeleted = currentLine[indexInString];
+
+        //push data onto stack to save for the undo feature.
+
+        newDeletion.setPositionOfDeletedContents(userPosition);
+        newDeletion.setChangedCharacters(toBeDeleted);
+        newDeletion.setCommand(command);
+        newDeletion.setLineNumber(currentLineNumber);
+
+	    //(userPosition, toBeDeleted, command, currentLineNumber);
+	    success = stackOfChanges.push(newDeletion);
+
+	    if (!success)
 	    {
-		    //end program?
+            cerr << "\n\nError. Push to stack failed. Goodbye!\n\n";
+            exit(2);
 	    }
 			
-	    deleteCurrentCharacter(userPosition);
+	        deleteCurrentCharacter(userPosition);
             changesWereMadeButNotSaved = true;
+            
+            placeCursorAt(startOfText);
             displayLines(); //Allows user to see change in real time.
             break;
         case 'j': case KEY_DOWN:
