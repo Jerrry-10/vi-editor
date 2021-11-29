@@ -43,6 +43,8 @@ private:
 	@post  User's final commands have been executed. Invalid commands have been ignored.
 	@return  True if user has entered the command to quit the program and false otherwise. */
 	bool endOfFileCommand();
+	
+	void initializeArray(string theArray[] const int size);
 
 public:
 	/** Default Constructor.
