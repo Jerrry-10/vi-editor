@@ -205,8 +205,8 @@ void editor::deleteCurrentLine()
 }
 
 editor::editor() {
-	//initializeArray();
-	//bubbleSort();
+	initializeArray(keywords, MAX_ARRAY);
+	bubbleSort(keywords, MAX_ARRAY);
 }
 editor::editor(string file) {
 
@@ -219,8 +219,8 @@ editor::editor(string file) {
     }
     else {
 	    
-	//initializeArray();
-	//bubbleSort();
+	initializeArray(keywords, MAX_ARRAY);
+	bubbleSort(keywords, MAX_ARRAY));
         string line;
         int lineNumber = 1;
         while (!in.eof()) {
