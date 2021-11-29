@@ -308,15 +308,15 @@ void editor::undoLastChange()
     if (!stackOfChanges.isEmpty() )	//else: Do nothing.
     {
 	//Get most recent change.
-	Change toBeUndone = stackOfChanges.peek();
+	Change changeToBeUndone = stackOfChanges.peek();
 	stackOfChanges.pop();
 	
 	//Work in progress. Restore toBeUndone.mChangedCharacters
-	if (toBeUndone.getCommand() == 'x')
+	if (changeToBeUndone.getCommand() == 'x')
 	{
-		
+	     
 	}
-	else if (toBeUndone.getCommand() == 'd')
+	else if (changeToBeUndone.getCommand() == 'd')
 	{
 		
 	}	//end inner if/else    
