@@ -326,7 +326,7 @@ void editor::undoLastChange()
             //undo x
             textToBeRestored = changeToBeUndone.getChangedCharacters();
 
-
+            //work in progress
 
             changesWereMadeButNotSaved = true;
 	    }
@@ -335,7 +335,7 @@ void editor::undoLastChange()
             //undo dd
             textToBeRestored = changeToBeUndone.getChangedCharacters();
             
-            
+            //work in progress
             
             changesWereMadeButNotSaved = true;
         }
@@ -422,7 +422,6 @@ void editor::run() {
     string currentLine = "";
     int indexInString = 0;
     bool success = true;
-    Position startOfText();     //(0,0) is default value. See Position.cpp
     
     Change newDeletion();
 
@@ -436,31 +435,29 @@ void editor::run() {
         {
         case 'x':
             //copy data to push onto stack.
-	    currentLineNumber = ( userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
-        currentLine = lines.getEntry(currentLineNumber);
-        indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
-        toBeDeleted = currentLine[indexInString];
+	        currentLineNumber = ( userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
+            currentLine = lines.getEntry(currentLineNumber);
+            indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
+            toBeDeleted = currentLine[indexInString];
 
-        //push data onto stack to save for the undo feature.
+            //push data onto stack to save for the undo feature.
 
-        newDeletion.setPositionOfDeletedContents(userPosition);
-        newDeletion.setChangedCharacters(toBeDeleted);
-        newDeletion.setCommand(command);
-        newDeletion.setLineNumber(currentLineNumber);
+            newDeletion.setPositionOfDeletedContents(userPosition);
+            newDeletion.setChangedCharacters(toBeDeleted);
+            newDeletion.setCommand(command);
+            newDeletion.setLineNumber(currentLineNumber);
 
-	    //(userPosition, toBeDeleted, command, currentLineNumber);
-	    success = stackOfChanges.push(newDeletion);
+	        success = stackOfChanges.push(newDeletion);
 
-	    if (!success)
-	    {
-            cerr << "\n\nError. Push to stack failed. Goodbye!\n\n";
-            exit(2);
-	    }
+	        if (!success)
+	        {
+                cerr << "\n\nError. Push to stack failed. Goodbye!\n\n";
+                exit(2);
+	        }
 			
 	        deleteCurrentCharacter(userPosition);
             changesWereMadeButNotSaved = true;
             
-            placeCursorAt(startOfText);
             displayLines(); //Allows user to see change in real time.
             break;
         case 'j': case KEY_DOWN:
