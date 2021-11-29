@@ -110,6 +110,27 @@ void placeCursorAt(Position coordinate) {
 
 // Member functions of class Editor:
 
+void editor::initializeArray(string theArray[] const int size)
+{
+	ifstream infile;
+	infile.open("keywords.txt");
+	
+	if (infile.fail() )
+	{
+		cout << "Error. Unable to open keyword file. Goodbye!\n\n";
+		exit(1);
+	}
+	else
+	{
+		for (int index = 0; index < size; index ++)
+		{
+			infile >> theArray[index];
+		}
+		infile.close();
+	}
+	
+}
+
 void editor::moveUp() {
     if (userPosition.getY() - 1 < 0) { //If out of bounds, do nothing.
 
