@@ -20,11 +20,15 @@ using namespace std;
 class editor {
 
 private:
+	
+	const int MAX_ARRAY = 
+	
 	LinkedList<string> lines; //A list of lines of text.
 	Position userPosition;
 	bool changesWereMadeButNotSaved = false;
 	bool endProgram = false;
 	LinkedStack<Change> stackOfChanges;
+	string keyword[MAX_ARRAY];
 
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
