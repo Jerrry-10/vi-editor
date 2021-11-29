@@ -20,7 +20,6 @@ using namespace std;
 //  Created by Frank M. Carrano and Timothy M. Henry.
 //  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
 
-*/
 int binarySearch(const int anArray[], int first, int last, int target)
 {
    int index;
