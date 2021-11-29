@@ -20,7 +20,8 @@ using namespace std;
 //  Created by Frank M. Carrano and Timothy M. Henry.
 //  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
 
-int binarySearch(const int anArray[], int first, int last, int target)
+template<class ItemType>
+int binarySearch(const ItemType anArray[], int first, int last, ItemType target)
 {
    int index;
    if (first > last)
@@ -109,7 +110,7 @@ void placeCursorAt(Position coordinate) {
 
 // Member functions of class Editor:
 
-void editor::initializeArray(string theArray[] const int size)
+void editor::initializeArray(string theArray[], const int size)
 {
 	ifstream infile;
 	infile.open("keywords.txt");
@@ -219,7 +220,7 @@ editor::editor(string file) {
     else {
 	    
 	initializeArray(keywords, MAX_ARRAY);
-	bubbleSort(keywords, MAX_ARRAY));
+	bubbleSort(keywords, MAX_ARRAY);
         string line;
         int lineNumber = 1;
         while (!in.eof()) {
@@ -235,6 +236,7 @@ editor::editor(string file) {
 
 //Page 2
 
+/*
 void editor::displayLines() { //Iteration 2 version
     system("cls");
 
@@ -262,9 +264,11 @@ void editor::displayLines() { //Iteration 2 version
     }
 }
 
-/* Iteration 3 version
+*/
 
-void Editor::displayLines()
+// Iteration 3 version
+
+void editor::displayLines()
 {
 int position;
 string nextLine, nextWord, line;
@@ -284,7 +288,7 @@ for (position = 1; position <= lines.getLength(); position++)
         word += nextLine[i];
         i++;
       }
-      if (binarySearch(keyWords, 0, numKeywords-1, word) != -1)  //found
+      if (binarySearch(keywords, 0, MAX_ARRAY-1, word) != -1)  //found
           colorText(1);
       else
           colorText(0);
@@ -301,10 +305,9 @@ for (position = 1; position <= lines.getLength(); position++)
 
   cout << endl;
  }
- placeCursorAt(uPos);
+ placeCursorAt(userPosition);
 } // end displayLines
 
-*/
 
 void editor::undoLastChange()
 {

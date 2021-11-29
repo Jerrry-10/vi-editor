@@ -17,11 +17,13 @@ November 16, 2021
 #include<conio.h>
 using namespace std;
 
+const int MAX_ARRAY = 60;
+
 class editor {
 
 private:
 	
-	const int MAX_ARRAY = 60;
+	
 	
 	LinkedList<string> lines; //A list of lines of text.
 	Position userPosition;
@@ -44,7 +46,7 @@ private:
 	@return  True if user has entered the command to quit the program and false otherwise. */
 	bool endOfFileCommand();
 	
-	void initializeArray(string theArray[] const int size);
+	void initializeArray(string theArray[], const int size);
 
 public:
 	/** Default Constructor.
