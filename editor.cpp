@@ -230,8 +230,6 @@ editor::editor(string file) {
     displayLines();
 }
 
-// void initializeArray();
-
 //Page 2
 
 void editor::displayLines() { //Iteration 2 version
