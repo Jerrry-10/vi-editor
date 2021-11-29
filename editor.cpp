@@ -118,6 +118,7 @@ void editor::deleteCurrentLine()
 
 editor::editor() {
 	//initializeArray();
+	//bubbleSort();
 }
 editor::editor(string file) {
 
@@ -131,6 +132,7 @@ editor::editor(string file) {
     else {
 	    
 	//initializeArray();
+	//bubbleSort();
         string line;
         int lineNumber = 1;
         while (!in.eof()) {
