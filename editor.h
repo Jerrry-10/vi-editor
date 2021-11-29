@@ -93,4 +93,41 @@ public:
 
 };
 
+//Nonmember Functions used by class Editor:
+
+//  Created by Frank M. Carrano and Timothy M. Henry.
+//  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
+
+/** Searches the array anArray[first] through anArray[last]
+    for a given value by using a binary search.
+ @pre  0 <= first, last <= SIZE - 1, where SIZE is the
+    maximum size of the array, and anArray[first] <=
+    anArray[first + 1] <= ... <= anArray[last].
+ @post  anArray is unchanged and either anArray[index] contains
+    the given value or index == -1.
+ @param anArray  The array to search.
+ @param first  The low index to start searching from.
+ @param last  The high index to stop searching at.
+ @param target  The search key.
+ @return  Either index, such that anArray[index] == target, or -1.
+*/
+int binarySearch(const int anArray[], int first, int last, int target);
+
+//  Created by Frank M. Carrano and Tim Henry.
+//  Copyright (c) 2016 __Pearson Education__. All rights reserved.
+
+// Listing 11-2.
+
+//#include <iostream>
+//#include <string>
+
+/** Sorts the items in an array into ascending order.
+ @pre  None.
+ @post  theArray is sorted into ascending order; n is unchanged.
+ @param theArray  The given array.
+ @param n  The size of theArray. */
+template<class ItemType>
+void bubbleSort(ItemType theArray[], int n);
+
+
 #endif 
