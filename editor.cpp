@@ -329,6 +329,7 @@ void editor::undoLastChange()
     {
 	//Get most recent change.
 	Change changeToBeUndone = stackOfChanges.peek();
+   // cout << changeToBeUndone.getCommand();
 	stackOfChanges.pop();
 	
 	    //Work in progress. Restore toBeUndone.mChangedCharacters
@@ -336,7 +337,9 @@ void editor::undoLastChange()
 	    {
             //undo x
             textToBeRestored = changeToBeUndone.getChangedCharacters();
+           // cout << "test\n \n \n";
 
+          //  lines.insert(changeToBeUndone.get, textToBeRestored);
             //work in progress
 
             changesWereMadeButNotSaved = true;
@@ -345,7 +348,8 @@ void editor::undoLastChange()
         {
             //undo dd
             textToBeRestored = changeToBeUndone.getChangedCharacters();
-            
+          //  cout << "\n\n\n\n\n\n\n\n\n\n\n Hello";
+            lines.insert(changeToBeUndone.getLineNumber(), textToBeRestored);
             //work in progress
             
             changesWereMadeButNotSaved = true;
@@ -448,8 +452,8 @@ void editor::run() {
             //copy data to push onto stack.
 	        currentLineNumber = ( userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
             currentLine = lines.getEntry(currentLineNumber);
-            indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
-            toBeDeleted = currentLine[indexInString];
+         //   indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
+            toBeDeleted = currentLine;
 
             //push data onto stack to save for the undo feature.
 
@@ -488,7 +492,26 @@ void editor::run() {
             if (command == 'd')
             {
 		//copy data and push to stack before deleting.
-		    
+                currentLineNumber = (userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
+                currentLine = lines.getEntry(currentLineNumber);
+                indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
+                toBeDeleted = currentLine;
+
+                //push data onto stack to save for the undo feature.
+
+                newDeletion.setPositionOfDeletedContents(userPosition);
+                newDeletion.setChangedCharacters(toBeDeleted);
+                newDeletion.setCommand(command);
+                newDeletion.setLineNumber(currentLineNumber);
+
+                success = stackOfChanges.push(newDeletion);
+
+                if (!success)
+                {
+                    cerr << "\n\nError. Push to stack failed. Goodbye!\n\n";
+                    exit(2);
+                }
+
                 deleteCurrentLine();
                 changesWereMadeButNotSaved = true;
                 displayLines(); //Allows user to see change in real time.
@@ -498,6 +521,7 @@ void editor::run() {
             break;
         case 'u':
              undoLastChange();
+             displayLines();
 	         break;
         case ':':
             //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
