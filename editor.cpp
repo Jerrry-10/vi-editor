@@ -274,6 +274,7 @@ void editor::displayLines()
 {
 int position;
 string nextLine, nextWord, line;
+system("CLS");
 
 // goes through each line in the linked list 
 for (position = 1; position <= lines.getLength(); position++)
