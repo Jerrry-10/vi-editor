@@ -434,7 +434,7 @@ void editor::run() {
     int indexInString = 0;
     bool success = true;
     
-    Change newDeletion();
+    Change newDeletion;
 
     //Loop to process commands entered by user.
     while (!endProgram)
@@ -497,8 +497,8 @@ void editor::run() {
             //else do nothing.
             break;
         case 'u':
-            undoLastChange();
-	     break;
+             undoLastChange();
+	         break;
         case ':':
             //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
             Position endOfFile(0, (lines.getLength() + 5));
