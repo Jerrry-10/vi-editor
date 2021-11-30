@@ -127,6 +127,8 @@ void editor::initializeArray(string theArray[], const int size)
 		for (int index = 0; index < size; index ++)
 		{
 			infile >> theArray[index];
+			
+			// cout << theArray[index] << endl; Test code
 		}
 		infile.close();
 	}
@@ -223,6 +225,14 @@ editor::editor(string file) {
 	    
 	    initializeArray(keywords, MAX_ARRAY);
 	    bubbleSort(keywords, MAX_ARRAY);
+	    
+	/*
+        for (int i = 0; i < MAX_ARRAY; i++)
+        {
+            cout << keywords[i] << endl; //Test code
+        }
+        */
+	    
         string line;
         int lineNumber = 1;
         while (!in.eof()) {
