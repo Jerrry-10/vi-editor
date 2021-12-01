@@ -18,7 +18,7 @@ November 16, 2021
 #include "editor.h"
 
 using namespace std;
-int main() {
+int main(int argc  char* argv[]) {
 
 	//	cout << "test";
 	//	string name;
