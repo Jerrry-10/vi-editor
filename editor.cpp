@@ -336,13 +336,15 @@ void editor::undoLastChange()
 	    if (changeToBeUndone.getCommand() == 'x')
 	    {
             //undo x
+            deleteCurrentLine();
             textToBeRestored = changeToBeUndone.getChangedCharacters();
            // cout << "test\n \n \n";
 
-          //  lines.insert(changeToBeUndone.get, textToBeRestored);
+            lines.insert(changeToBeUndone.getLineNumber(), textToBeRestored);
             //work in progress
 
             changesWereMadeButNotSaved = true;
+
 	    }
         else if (changeToBeUndone.getCommand() == 'd')
         {
@@ -435,6 +437,7 @@ void editor::run() {
     int currentLineNumber = 1;
     string toBeDeleted = "";
     string currentLine = "";
+    string currentChar = "";
     int indexInString = 0;
     bool success = true;
     
@@ -449,12 +452,12 @@ void editor::run() {
         switch (command)
         {
         case 'x':
-            //copy data to push onto stack.
-	        currentLineNumber = ( userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
-            currentLine = lines.getEntry(currentLineNumber);
-         //   indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
-            toBeDeleted = currentLine;
 
+            //copy data to push onto stack.
+	        currentLineNumber = (userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
+            indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
+            currentChar = lines.getEntry(currentLineNumber);
+            toBeDeleted = currentChar;
             //push data onto stack to save for the undo feature.
 
             newDeletion.setPositionOfDeletedContents(userPosition);
@@ -462,13 +465,13 @@ void editor::run() {
             newDeletion.setCommand(command);
             newDeletion.setLineNumber(currentLineNumber);
 
-	        success = stackOfChanges.push(newDeletion);
+            success = stackOfChanges.push(newDeletion);
 
-	        if (!success)
-	        {
+            if (!success)
+            {
                 cerr << "\n\nError. Push to stack failed. Goodbye!\n\n";
                 exit(2);
-	        }
+            }
 			
 	        deleteCurrentCharacter(userPosition);
             changesWereMadeButNotSaved = true;
