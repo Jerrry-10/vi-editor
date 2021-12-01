@@ -335,9 +335,22 @@ void editor::undoLastChange()
 	    //Work in progress. Restore toBeUndone.mChangedCharacters
 	    if (changeToBeUndone.getCommand() == 'x')
 	    {
+           //Save user's Y-coordinate for later.
+            int storeUserPositionY = userPosition.getY();
+
+            //It is possible for the user to move the cursor to a different line between hitting 'x' and hitting 'u'.
+            //The call to deleteCurrentLine will only delete the correct line if userPosition.Y is still the same value that it was when 'x' was pressed.
+            //This code ensures that userPosition.Y has THAT value when deleteCurrentLine is called.
+            int yCoordinateOfChangeToBeUndone = changeToBeUndone.getPositionOfDeletedContents().getY();
+            userPosition.setY(yCoordinateOfChangeToBeUndone);
+
             //undo x
             deleteCurrentLine();
             textToBeRestored = changeToBeUndone.getChangedCharacters();
+
+            //reset userPosition.Y to value it had before method was called.
+            userPosition.setY(storeUserPositionY);
+
            // cout << "test\n \n \n";
 
             lines.insert(changeToBeUndone.getLineNumber(), textToBeRestored);
