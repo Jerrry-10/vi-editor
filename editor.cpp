@@ -24,24 +24,24 @@ using namespace std;
 template<class ItemType>
 int binarySearch(const ItemType anArray[], int first, int last, ItemType target)
 {
-   int index;
-   if (first > last)
-      index = -1; // target not in original array
-   else
-   {
-      // If target is in anArray, anArray[first] <= target <= anArray[last]
-      int mid = first + (last - first) / 2;
-      if (target == anArray[mid])
-         index = mid; // target found at anArray[mid]
-      else if (target < anArray[mid])
-         // Point X
-         index = binarySearch(anArray, first, mid - 1, target);
-      else
-         // Point Y
-         index = binarySearch(anArray, mid + 1, last, target);
-   }  // end if
-   
-   return index;
+    int index;
+    if (first > last)
+        index = -1; // target not in original array
+    else
+    {
+        // If target is in anArray, anArray[first] <= target <= anArray[last]
+        int mid = first + (last - first) / 2;
+        if (target == anArray[mid])
+            index = mid; // target found at anArray[mid]
+        else if (target < anArray[mid])
+            // Point X
+            index = binarySearch(anArray, first, mid - 1, target);
+        else
+            // Point Y
+            index = binarySearch(anArray, mid + 1, last, target);
+    }  // end if
+
+    return index;
 }  // end binarySearch
 
 //  Created by Frank M. Carrano and Tim Henry.
@@ -56,41 +56,41 @@ int binarySearch(const ItemType anArray[], int first, int last, ItemType target)
 template<class ItemType>
 void bubbleSort(ItemType theArray[], int n)
 {
-   bool sorted = false; // False when swaps occur
-   int pass = 1;
-   while (!sorted && (pass < n))
-   {
-      // At this point, theArray[n+1-pass..n-1] is sorted
-      // and all of its entries are > the entries in theArray[0..n-pass]
-      sorted = true; // Assume sorted
-      for (int index = 0; index < n - pass; index++)
-      {
-         // At this point, all entries in theArray[0..index-1]
-         // are <= theArray[index]
-         int nextIndex = index + 1;
-         if (theArray[index] > theArray[nextIndex])
-         {
-            // Exchange entries
-            std::swap(theArray[index], theArray[nextIndex]);
-            sorted = false; // Signal exchange
-         } // end if
-      }  // end for
-      // Assertion: theArray[0..n-pass-1] < theArray[n-pass]
-      
-      pass++;
-   }  // end while
+    bool sorted = false; // False when swaps occur
+    int pass = 1;
+    while (!sorted && (pass < n))
+    {
+        // At this point, theArray[n+1-pass..n-1] is sorted
+        // and all of its entries are > the entries in theArray[0..n-pass]
+        sorted = true; // Assume sorted
+        for (int index = 0; index < n - pass; index++)
+        {
+            // At this point, all entries in theArray[0..index-1]
+            // are <= theArray[index]
+            int nextIndex = index + 1;
+            if (theArray[index] > theArray[nextIndex])
+            {
+                // Exchange entries
+                std::swap(theArray[index], theArray[nextIndex]);
+                sorted = false; // Signal exchange
+            } // end if
+        }  // end for
+        // Assertion: theArray[0..n-pass-1] < theArray[n-pass]
+
+        pass++;
+    }  // end while
 }  // end bubbleSort
 
 
 void colorText(int value) {
 
-	COORD coord;
+    COORD coord;
 
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	FlushConsoleInputBuffer(hConsole);
+    FlushConsoleInputBuffer(hConsole);
 
-	SetConsoleTextAttribute(hConsole, value + 240);
+    SetConsoleTextAttribute(hConsole, value + 240);
 
 }
 
@@ -114,25 +114,25 @@ void placeCursorAt(Position coordinate) {
 
 void editor::initializeArray(string theArray[], const int size)
 {
-	ifstream infile;
-	infile.open("keywords.txt");
-	
-	if (infile.fail() )
-	{
-		cout << "Error. Unable to open keyword file. Goodbye!\n\n";
-		exit(1);
-	}
-	else
-	{
-		for (int index = 0; index < size; index ++)
-		{
-			infile >> theArray[index];
-			
-			// cout << theArray[index] << endl; Test code
-		}
-		infile.close();
-	}
-	
+    ifstream infile;
+    infile.open("keywords.txt");
+
+    if (infile.fail())
+    {
+        cout << "Error. Unable to open keyword file. Goodbye!\n\n";
+        exit(1);
+    }
+    else
+    {
+        for (int index = 0; index < size; index++)
+        {
+            infile >> theArray[index];
+
+            // cout << theArray[index] << endl; Test code
+        }
+        infile.close();
+    }
+
 }
 
 void editor::moveUp() {
@@ -142,7 +142,7 @@ void editor::moveUp() {
     else if (userPosition.getY() != -1) {
         userPosition.setY(userPosition.getY() - 1); // Sets the position to be 1 higher.
     }
-    
+
     /* If the old line is longer than the new line, then when cursor moves up, its x coordinate could be out of bounds
     for the new line. If so, this if statement resets the x coordinate to the end of the new line. */
     int length = lines.getEntry(userPosition.getY() + 1).length(); //get Length of current line
@@ -192,7 +192,7 @@ void editor::moveRight() {
 void editor::deleteCurrentLine()
 {
     int currentLine = userPosition.getY() + 1; //Need +1 because list Lines starts at 1 but coordinates in class Position start at 0.
-    
+
     lines.remove(currentLine); //Delete the line. Current line = next line.
 
     //Get Length of new current line.
@@ -201,16 +201,16 @@ void editor::deleteCurrentLine()
 
     /* If the line to delete was longer than the next line, then after deletion, cursor's x coordinate could be out of bounds
     for the newly current line. If so, this if statement resets the x coordinate to the end of the line. */
-    if (userPosition.getX() > (length -1) ) //string indices and coordinates both begin at 0, not 1.
+    if (userPosition.getX() > (length - 1)) //string indices and coordinates both begin at 0, not 1.
     {
-        userPosition.setX(length -1);
+        userPosition.setX(length - 1);
         placeCursorAt(userPosition);
     }
 }
 
 editor::editor() {
-	initializeArray(keywords, MAX_ARRAY);
-	bubbleSort(keywords, MAX_ARRAY);
+    initializeArray(keywords, MAX_ARRAY);
+    bubbleSort(keywords, MAX_ARRAY);
 }
 editor::editor(string file) {
 
@@ -222,17 +222,17 @@ editor::editor(string file) {
         exit(1);
     }
     else {
-	    
-	    initializeArray(keywords, MAX_ARRAY);
-	    bubbleSort(keywords, MAX_ARRAY);
-	    
-	/*
-        for (int i = 0; i < MAX_ARRAY; i++)
-        {
-            cout << keywords[i] << endl; //Test code
-        }
-        */
-	    
+
+        initializeArray(keywords, MAX_ARRAY);
+        bubbleSort(keywords, MAX_ARRAY);
+
+        /*
+            for (int i = 0; i < MAX_ARRAY; i++)
+            {
+                cout << keywords[i] << endl; //Test code
+            }
+            */
+
         string line;
         int lineNumber = 1;
         while (!in.eof()) {
@@ -251,73 +251,67 @@ editor::editor(string file) {
 /*
 void editor::displayLines() { //Iteration 2 version
     system("cls");
-
     if (!lines.isEmpty()) {
         int numberOfLines = lines.getLength();
-        
+
         //Save cursor's position for future use.
         int storeX = userPosition.getX(), storeY = userPosition.getY();
-
         //Move cursor to beginning of text.
         userPosition.setX(0);
         userPosition.setY(0);
-
         //Loop to print each line to console. Note that the first position in the LinkedList lines is 1, not 0.
         for (int i = 1; i < numberOfLines + 1; i++)
         {
             cout << lines.getEntry(i) << endl;
-
         }
-
         //Return cursor to original position.
         userPosition.setX(storeX);
         userPosition.setY(storeY);
         placeCursorAt(userPosition);
     }
 }
-
 */
 
 // Iteration 3 version
 
 void editor::displayLines()
 {
-int position;
-string nextLine, nextWord, line;
-system("CLS");
+    int position;
+    string nextLine, nextWord, line;
+    system("CLS");
 
-// goes through each line in the linked list 
-for (position = 1; position <= lines.getLength(); position++)
-{
-  nextLine = lines.getEntry(position);
+    // goes through each line in the linked list 
+    for (position = 1; position <= lines.getLength(); position++)
+    {
+        nextLine = lines.getEntry(position);
 
-  int i = 0;
-  while (i < nextLine.length()) {
-    string word;
-    // isolate a word at a time (can contain underscores)
-    if (isalpha(nextLine[i])) {
-      while (isalpha(nextLine[i])|| nextLine[i]=='_') {
-        word += nextLine[i];
-        i++;
-      }
-      if (binarySearch(keywords, 0, MAX_ARRAY-1, word) != -1)  //found
-          colorText(1);
-      else
-          colorText(0);
-      cout << word;
-   }
+        int i = 0;
+        while (i < nextLine.length()) {
+            string word;
+            // isolate a word at a time (can contain underscores)
+            if (isalpha(nextLine[i])) {
+                while (isalpha(nextLine[i]) || nextLine[i] == '_') {
+                    word += nextLine[i];
+                    i++;
+                }
+                if (binarySearch(keywords, 0, MAX_ARRAY - 1, word) != -1)  //found
+                    colorText(1);
+                else
+                    colorText(0);
+                cout << word;
+            }
 
-   else {
-      colorText(0);
-      cout << nextLine[i];
-      i++;
-   }
+            else {
+                colorText(0);
+                cout << nextLine[i];
+                i++;
+            }
 
- }
+        }
 
-  cout << endl;
- }
- placeCursorAt(userPosition);
+        cout << endl;
+    }
+    placeCursorAt(userPosition);
 } // end displayLines
 
 
@@ -325,35 +319,53 @@ void editor::undoLastChange()
 {
     string textToBeRestored = "";
 
-    if (!stackOfChanges.isEmpty() )	//else: Do nothing.
+    if (!stackOfChanges.isEmpty())	//else: Do nothing.
     {
-	//Get most recent change.
-	Change changeToBeUndone = stackOfChanges.peek();
-   // cout << changeToBeUndone.getCommand();
-	stackOfChanges.pop();
-	
-	    //Work in progress. Restore toBeUndone.mChangedCharacters
-	    if (changeToBeUndone.getCommand() == 'x')
-	    {
+        //Get most recent change.
+        Change changeToBeUndone = stackOfChanges.peek();
+        // cout << changeToBeUndone.getCommand();
+        stackOfChanges.pop();
+        int yCoordinateOfChangeToBeUndone = changeToBeUndone.getPositionOfDeletedContents().getY();
+        int xCoordinateOfChangeToBeUndone = changeToBeUndone.getPositionOfDeletedContents().getX();
+        userPosition.setX(xCoordinateOfChangeToBeUndone);
+        userPosition.setY(yCoordinateOfChangeToBeUndone);
+
+        //Work in progress. Restore toBeUndone.mChangedCharacters
+        if (changeToBeUndone.getCommand() == 'x')
+        {
+            //Save user's Y-coordinate for later.
+           // int storeUserPositionY = userPosition.getY();
+
+            //It is possible for the user to move the cursor to a different line between hitting 'x' and hitting 'u'.
+            //The call to deleteCurrentLine will only delete the correct line if userPosition.Y is still the same value that it was when 'x' was pressed.
+            //This code ensures that userPosition.Y has THAT value when deleteCurrentLine is called.
+            placeCursorAt(userPosition);
+
             //undo x
             deleteCurrentLine();
             textToBeRestored = changeToBeUndone.getChangedCharacters();
-           // cout << "test\n \n \n";
+
+            //reset userPosition.Y to value it had before method was called.
+            //userPosition.setY(storeUserPositionY);
+
+            // cout << "test\n \n \n";
 
             lines.insert(changeToBeUndone.getLineNumber(), textToBeRestored);
             //work in progress
 
             changesWereMadeButNotSaved = true;
 
-	    }
+        }
         else if (changeToBeUndone.getCommand() == 'd')
         {
             //undo dd
             textToBeRestored = changeToBeUndone.getChangedCharacters();
-          //  cout << "\n\n\n\n\n\n\n\n\n\n\n Hello";
+            placeCursorAt(userPosition);
+
+            //  cout << "\n\n\n\n\n\n\n\n\n\n\n Hello";
             lines.insert(changeToBeUndone.getLineNumber(), textToBeRestored);
             //work in progress
-            
+
             changesWereMadeButNotSaved = true;
         }
         else
@@ -415,7 +427,7 @@ bool editor::endOfFileCommand()
         {
             cout << "\n\nChanges have NOT been saved. Enter :q! to quit anyway. Enter any other key to continue: ";
             string nextCommand;
-            getline(cin >>ws, nextCommand);
+            getline(cin >> ws, nextCommand);
 
             if (nextCommand == ":q!")
             {
@@ -425,7 +437,7 @@ bool editor::endOfFileCommand()
             {
                 placeCursorAt(userPosition);
             }
-            
+
         }
     }
 
@@ -440,7 +452,7 @@ void editor::run() {
     string currentChar = "";
     int indexInString = 0;
     bool success = true;
-    
+
     Change newDeletion;
 
     //Loop to process commands entered by user.
@@ -454,7 +466,7 @@ void editor::run() {
         case 'x':
 
             //copy data to push onto stack.
-	        currentLineNumber = (userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
+            currentLineNumber = (userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
             indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
             currentChar = lines.getEntry(currentLineNumber);
             toBeDeleted = currentChar;
@@ -472,10 +484,10 @@ void editor::run() {
                 cerr << "\n\nError. Push to stack failed. Goodbye!\n\n";
                 exit(2);
             }
-			
-	        deleteCurrentCharacter(userPosition);
+
+            deleteCurrentCharacter(userPosition);
             changesWereMadeButNotSaved = true;
-            
+
             displayLines(); //Allows user to see change in real time.
             break;
         case 'j': case KEY_DOWN:
@@ -494,7 +506,7 @@ void editor::run() {
             command = _getch();
             if (command == 'd')
             {
-		//copy data and push to stack before deleting.
+                //copy data and push to stack before deleting.
                 currentLineNumber = (userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
                 currentLine = lines.getEntry(currentLineNumber);
                 indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
@@ -518,14 +530,14 @@ void editor::run() {
                 deleteCurrentLine();
                 changesWereMadeButNotSaved = true;
                 displayLines(); //Allows user to see change in real time.
-                
+
             }
             //else do nothing.
             break;
         case 'u':
-             undoLastChange();
-             displayLines();
-	         break;
+            undoLastChange();
+            displayLines();
+            break;
         case ':':
             //Create position object which denotes the first space on the fifth empty line (x=0, y= last line + 5).
             Position endOfFile(0, (lines.getLength() + 5));
@@ -536,10 +548,10 @@ void editor::run() {
             cout << ':';
 
             //Process the user's end-of-file command ('w' or 'q').
-           
+
             endProgram = endOfFileCommand();
             break;
-        
+
         }//End switch
     }//End while
 }
