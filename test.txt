@@ -1,10 +1,11 @@
  #include <iostream>
- using namespace std;
- int main ()
+ usi napace std;
+ in main ()
 {
-int x = 0;
-double y = 7 /2;
 cout << "Hello, World!\n\n";
 system ("pause");
 return 0;
 }
+
+
+

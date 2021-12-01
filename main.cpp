@@ -18,13 +18,14 @@ November 16, 2021
 #include "editor.h"
 
 using namespace std;
-int main(int argc  char* argv[]) {
-
+int main(int argc,  char* argv[]) {
+	system("CLS");
 	//	cout << "test";
 	//	string name;
 	//	cout << "Enter the name of your file" << endl;
 	//	cin >> name;
-	editor vi{ "test.txt" };
+	editor vi{ argv[1], "keywords.txt" };
+	//Change "test.txt" to argv[1]?
 	vi.run();
 
 

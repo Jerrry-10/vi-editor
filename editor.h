@@ -31,6 +31,8 @@ private:
 	bool endProgram = false;
 	LinkedStack<Change> stackOfChanges;
 	string keywords[MAX_ARRAY];
+	string mKeywordFile = "";
+	string mTextFile = "";
 
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
@@ -59,7 +61,7 @@ public:
 	@pre  The string file denotes a valid text file in the same directory as the project.
 	@post  Prints error message and terminates program if file cannot be opened.
 		Otherwise, each line in file becomes an item in the list lines. */
-	editor(string file);
+	editor(string file, string keywordFile);
 
 	/**Function to undo the last change to the text.
 	@post  The last change is undone. If no changes were made, does nothing.
