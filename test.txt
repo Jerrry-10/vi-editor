@@ -3,8 +3,10 @@
  int main ()
 {
 int x = 0;
-double y = 7 /2;
-cout << "Hello, World!\n\n";
+doule y = 7 /2;
+cou << "Hello, World!\n\n";
 system ("pause");
 return 0;
 }
+
+
