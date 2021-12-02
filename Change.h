@@ -9,13 +9,17 @@ using std::string;
 	{
 	public:
 	    
-	    //Default Constructor. See default values in private section.
+	    /**Default Constructor. 
+	    @post  Instantiates object with default values in private section.
+	    Note: They are dummy values which act as temporary placeholders for the real values.
+	    */
 	    Change();
 	    
 	    /** Constructor.
 	    @param positionOfDeletedContents  The position in the text where the deleted contents were located.
 	    @param changedCharacters  The single character OR line of text deleted.
 	    @param command  The command entered by the user. Either 'x' to delete a single char or 'd' to delete a line.
+	    @param lineNumber  The number of the line on which the change occurred.
 	    @post  Object is constructed.
 	    */
 	    Change (const Position& positionOfDeletedContents, const string& changedCharacters, char command, int lineNumber);
@@ -38,10 +42,10 @@ using std::string;
 	    /**Accessor for mLineNumber.
 	    @return  the value of mLineNumber,
 	    */
-      	int getLineNumber() const;
+      	    int getLineNumber() const;
 
 		//The following mutators are only recommended for use on Change objects which have been instantiated with
-		//dummy values by the default constructor. Objects which have given real values at instantiation should generally
+		//dummy values by the default constructor. Objects which have been given real values at instantiation should generally
 		//NOT have their attributes reset.
 
 		/**Mutator for mPositionOfDeletedContents
