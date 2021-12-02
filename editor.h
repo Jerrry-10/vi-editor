@@ -37,22 +37,22 @@ private:
 	string mTextFile = "";
 	
 	/** Helper function to write contents of Editor object to output file.
-	@post  Contents written to file "test.txt" */
+	@post  Contents written to file "test.txt" and changesWereMadeButNotSaved = false. */
 	void writeToFile();
 
 	/**Helper function to delete the character at the user's current position.
 	@param  userPosition  The current position of the user's cursor in the editor.
-	@post  The character at userPosition has been deleted. */
+	@post  The character at userPosition has been deleted. changesWereMadeButNotSaved = true. */
 	void deleteCurrentCharacter(Position userPosition);
 
 	/**Helper function to read, echo, and execute user's end-of-program commands after ':'
-	@post  User's final commands have been executed. Invalid commands have been ignored.
+	@post  User's end-of-file commands have been executed. Invalid commands have been ignored.
 	@return  True if user has entered the command to quit the program and false otherwise. */
 	bool endOfFileCommand();
 	
-	/*
-	
-	*/
+	/*Helper method to read in the data from mKeywordFile and initialize an array with its values.
+	@post  Prints an error message and terminates program if mKeywordFile cannot be opened. Otherwise,
+		the array holds the values from mKeywordFile. */
 	void initializeArray(string theArray[], const int size);
 
 public:
@@ -62,19 +62,20 @@ public:
 	editor();
 
 	/** Constructor which instantiates an Editor object by reading a text file into it.
-	@param file  The name of the file to be read in.
-	@pre  The string file denotes a valid text file in the same directory as the project.
-	@post  Prints error message and terminates program if file cannot be opened.
-		Otherwise, each line in file becomes an item in the list lines. */
+	@param  file  The name of the file to be read in.
+	@param  keywordFile  The name of the file holding the keywords.
+	@pre  The strings file and keywordFile denote valid text files in the same directory as the project.
+	@post  Prints error message and terminates program if files cannot be opened.
+		Otherwise, each line in file becomes an item in the list lines and the array keywords holds the strings in keywordFile. */
 	editor(string file, string keywordFile);
 
 	/**Function to undo the last change to the text.
-	@post  The last change is undone. If no changes were made, does nothing.
+	@post  The last change is undone and changesWereMadeButNotSaved = true. If no changes were made, does nothing.
 	*/
 	void undoLastChange();
 	
 	/**Function to print the contents of the LinkedList lines to the screen.
-	@post  Each entry in lines is printed to the screen on its own line. */
+	@post  Each entry in lines is printed to the screen on its own line. Keywords are printed in dark blue.*/
 	void displayLines();
 
 	/**Function to read in user's commands as single characters and execute them.
@@ -99,7 +100,7 @@ public:
 
 	/**Method to delete the current line of text from the editor.
 	@pre  cursor's position corresponds to a position on a valid line of text in the LinkedList lines.
-	@post  current line of text has been deleted. */
+	@post  current line of text has been deleted. changesWereMadeButNotSaved = true. */
 	void deleteCurrentLine();
 
 
