@@ -98,6 +98,8 @@ public:
 	@post  Does nothing if cursor is already on last character of line. Otherwise, moves the cursor right one space. */
 	void moveRight();
 
+//Page 2
+	
 	/**Method to delete the current line of text from the editor.
 	@pre  cursor's position corresponds to a position on a valid line of text in the LinkedList lines.
 	@post  current line of text has been deleted. changesWereMadeButNotSaved = true. */
