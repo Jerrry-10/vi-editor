@@ -450,6 +450,8 @@ bool editor::endOfFileCommand()
 
 void editor::run() {
     char command = '\0';
+    
+    //Variables involved in pushing data onto stackOfChanges
     int currentLineNumber = 1;
     string toBeDeleted = "";
     string currentLine = "";
@@ -457,6 +459,8 @@ void editor::run() {
     int indexInString = 0;
     bool success = true;
 
+    //Compiler does not allow instantiation of object inside a switch case.
+    //Instantiate object with placeholder values to be replaced by real data.
     Change newDeletion;
 
     //Loop to process commands entered by user.
@@ -468,19 +472,21 @@ void editor::run() {
         switch (command)
         {
         case 'x':
+            //Case to delete current character.
 
-            //copy data to push onto stack.
+            //Get data needed for Change object
             currentLineNumber = (userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
             indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
             currentChar = lines.getEntry(currentLineNumber);
             toBeDeleted = currentChar;
-            //push data onto stack to save for the undo feature.
-
+           
+            //Place data into Change object
             newDeletion.setPositionOfDeletedContents(userPosition);
             newDeletion.setChangedCharacters(toBeDeleted);
             newDeletion.setCommand(command);
             newDeletion.setLineNumber(currentLineNumber);
-
+              
+            //Push Change object onto stack to save data for the undo feature.
             success = stackOfChanges.push(newDeletion);
 
             if (!success)
@@ -491,7 +497,7 @@ void editor::run() {
 
             deleteCurrentCharacter(userPosition);
             changesWereMadeButNotSaved = true;
-
+//Page 5      
             displayLines(); //Allows user to see change in real time.
             break;
         case 'j': case KEY_DOWN:
@@ -510,19 +516,20 @@ void editor::run() {
             command = _getch();
             if (command == 'd')
             {
-                //copy data and push to stack before deleting.
+                //Get data needed for Change Object
                 currentLineNumber = (userPosition.getY() + 1); //Y coordinates start at 0, Lines start at 1
                 currentLine = lines.getEntry(currentLineNumber);
                 indexInString = userPosition.getX();    //x-coordinates and string indices both start at 0;
                 toBeDeleted = currentLine;
 
-                //push data onto stack to save for the undo feature.
+                //Send data to Change object
 
                 newDeletion.setPositionOfDeletedContents(userPosition);
                 newDeletion.setChangedCharacters(toBeDeleted);
                 newDeletion.setCommand(command);
                 newDeletion.setLineNumber(currentLineNumber);
 
+                //Push Change object onto stack to save data for the undo feature.
                 success = stackOfChanges.push(newDeletion);
 
                 if (!success)
