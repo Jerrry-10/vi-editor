@@ -1,3 +1,7 @@
+/**@file Change.h
+
+*/
+
 #ifndef CHANGE_H
 #define CHANGE_H
 
@@ -17,7 +21,7 @@ using std::string;
 	    
 	    /** Constructor.
 	    @param positionOfDeletedContents  The position in the text where the deleted contents were located.
-	    @param changedCharacters  The single character OR line of text deleted.
+	    @param changedCharacters  The line of text being altered.
 	    @param command  The command entered by the user. Either 'x' to delete a single char or 'd' to delete a line.
 	    @param lineNumber  The number of the line on which the change occurred.
 	    @post  Object is constructed.
@@ -55,7 +59,7 @@ using std::string;
 		void setPositionOfDeletedContents(const Position& positionOfDeletedContents);
 
 		/**Mutator for mChangedCharacters
-		@param changedCharacters  The string or character which has been deleted.
+		@param changedCharacters  The string being altered.
 		@post  mChangedCharacters = changedCharacters
 		*/
 		void setChangedCharacters(const string& changedCharacters);
@@ -74,10 +78,10 @@ using std::string;
 
 
 	private:
-	    string mChangedCharacters = ""; //Can be a line or a single char.
+	    string mChangedCharacters = ""; //The line (string) on which the change took place.
 	    Position mPositionOfDeletedContents; //default position is (0,0) See Position.cpp
-      	int mLineNumber = 1;
-	    char mCommand = 'x'; //'x' or 'd'
+            int mLineNumber = 1;	//The number of the line on which the deletion took place.
+	    char mCommand = //command entered by user, either 'x' or 'd'.
 	};
 
 #endif
