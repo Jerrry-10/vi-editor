@@ -1,6 +1,6 @@
 /** @file  editor.cpp Page 1
 @author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
-November 16, 2021
+December 2, 2021
 */
 #include "editor.h"
 #include "LinkedStack.h"
@@ -19,6 +19,7 @@ using namespace std;
 
 //  Created by Frank M. Carrano and Timothy M. Henry.
 //  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
+//Modified for templation by program authors.
 //Authors' original comment section moved to function protoype in header file.
 
 template<class ItemType>
@@ -119,7 +120,7 @@ void editor::initializeArray(string theArray[], const int size)
 
     if (infile.fail())
     {
-        cout << "Error. Unable to open keyword file. Goodbye!\n\n";
+        cerr << "Error. Unable to open keyword file. Goodbye!\n\n";
         exit(1);
     }
     else
@@ -195,6 +196,9 @@ void editor::deleteCurrentLine()
 
     lines.remove(currentLine); //Delete the line. Current line = next line.
 
+    
+    //Page 2
+    
     //Get Length of new current line.
     string thisLine = lines.getEntry(currentLine);
     int length = thisLine.length();
@@ -248,8 +252,6 @@ editor::editor(string file, string keywordFile) {
     displayLines();
 }
 
-//Page 2
-
 /*
 void editor::displayLines() { //Iteration 2 version
     system("cls");
@@ -275,6 +277,7 @@ void editor::displayLines() { //Iteration 2 version
 
 // Iteration 3 version
 
+//Method provided by Dr. Sturm. lines 285 and 302 modified by program authors for program compatibility.
 void editor::displayLines()
 {
     int position;
@@ -294,7 +297,8 @@ void editor::displayLines()
                 while (isalpha(nextLine[i]) || nextLine[i] == '_') {
                     word += nextLine[i];
                     i++;
-                }
+                }                
+//Page 3  
                 if (binarySearch(keywords, 0, MAX_ARRAY - 1, word) != -1)  //found
                     colorText(1);
                 else
@@ -315,58 +319,55 @@ void editor::displayLines()
     placeCursorAt(userPosition);
 } // end displayLines
 
-
 void editor::undoLastChange()
 {
     string textToBeRestored = "";
 
     if (!stackOfChanges.isEmpty())	//else: Do nothing.
     {
-        //Get most recent change.
+        //Get most recent change and remove it from stack.
         Change changeToBeUndone = stackOfChanges.peek();
-        // cout << changeToBeUndone.getCommand();
+        // cout << changeToBeUndone.getCommand(); 
         stackOfChanges.pop();
+        
+        //Get the original x and y coordinates of the change, and set User Position to those values.
         int yCoordinateOfChangeToBeUndone = changeToBeUndone.getPositionOfDeletedContents().getY();
         int xCoordinateOfChangeToBeUndone = changeToBeUndone.getPositionOfDeletedContents().getX();
         userPosition.setX(xCoordinateOfChangeToBeUndone);
         userPosition.setY(yCoordinateOfChangeToBeUndone);
 
-        //Work in progress. Restore toBeUndone.mChangedCharacters
+        //Restore the changes.
         if (changeToBeUndone.getCommand() == 'x')
         {
-            //Save user's Y-coordinate for later.
-           // int storeUserPositionY = userPosition.getY();
-
-            //It is possible for the user to move the cursor to a different line between hitting 'x' and hitting 'u'.
-            //The call to deleteCurrentLine will only delete the correct line if userPosition.Y is still the same value that it was when 'x' was pressed.
-            //This code ensures that userPosition.Y has THAT value when deleteCurrentLine is called.
+            //Place cursor at original position of the change.
             placeCursorAt(userPosition);
 
-            //undo x
+            //Remove the altered line (missing the deleted character) from the list lines.
             deleteCurrentLine();
+            
+            //Get the previous version of the line (including the deleted character).
             textToBeRestored = changeToBeUndone.getChangedCharacters();
 
-            //reset userPosition.Y to value it had before method was called.
-            //userPosition.setY(storeUserPositionY);
-
-            // cout << "test\n \n \n";
-
+            //Restore the previous version of the altered line (which includes the deleted character)
+            //to its original position in the list lines.
             lines.insert(changeToBeUndone.getLineNumber(), textToBeRestored);
-            //work in progress
 
             changesWereMadeButNotSaved = true;
 
         }
         else if (changeToBeUndone.getCommand() == 'd')
         {
-            //undo dd
+            //Get the deleted line.
             textToBeRestored = changeToBeUndone.getChangedCharacters();
+            
+            //Place cursor at original site of the change.
             placeCursorAt(userPosition);
 
             //  cout << "\n\n\n\n\n\n\n\n\n\n\n Hello";
+            
+            //Restore the deleted line to its original position.
             lines.insert(changeToBeUndone.getLineNumber(), textToBeRestored);
-            //work in progress
-
+           
             changesWereMadeButNotSaved = true;
         }
         else
@@ -399,6 +400,8 @@ void editor::deleteCurrentCharacter(Position userPosition)
     int lineNumber = userPosition.getY() + 1;
     int characterPosition = userPosition.getX();
 
+//Page 4
+    
     //delete current char.
     tempString = lines.getEntry(lineNumber);
     tempString.erase(characterPosition, 1);
