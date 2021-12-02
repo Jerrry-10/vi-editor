@@ -1,7 +1,7 @@
 /**@file  editor.h Page 1
 Class to create and run a primitive text editor.
 @author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
-November 16, 2021
+December 2, 2021
 */
 #ifndef EDITOR_H_
 #define EDITOR_H_
@@ -32,8 +32,10 @@ private:
 	LinkedStack<Change> stackOfChanges;
 	string keywords[MAX_ARRAY];
 	string mKeywordFile = "";
-	string mTextFile = "";
 
+	//Used by multiple methods, so if its value is not hard-coded, it best to make it an attribute.
+	string mTextFile = "";
+	
 	/** Helper function to write contents of Editor object to output file.
 	@post  Contents written to file "test.txt" */
 	void writeToFile();
@@ -48,6 +50,9 @@ private:
 	@return  True if user has entered the command to quit the program and false otherwise. */
 	bool endOfFileCommand();
 	
+	/*
+	
+	*/
 	void initializeArray(string theArray[], const int size);
 
 public:
