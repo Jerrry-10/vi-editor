@@ -83,7 +83,7 @@ using std::string;
 	    string mChangedCharacters = ""; //The line (string) on which the change took place.
 	    Position mPositionOfDeletedContents; //default position is (0,0) See Position.cpp
             int mLineNumber = 1;	//The number of the line on which the deletion took place.
-	    char mCommand = //command entered by user, either 'x' or 'd'.
+	    char mCommand = 'x'; //command entered by user, either 'x' or 'd'.
 	};
 
 #endif
