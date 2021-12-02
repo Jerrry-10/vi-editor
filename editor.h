@@ -127,7 +127,8 @@ public:
  @param target  The search key.
  @return  Either index, such that anArray[index] == target, or -1.
 */
-int binarySearch(const int anArray[], int first, int last, int target);
+template<class ItemType>
+int binarySearch(const ItemType anArray[], int first, int last, ItemType target)
 
 //  Created by Frank M. Carrano and Tim Henry.
 //  Copyright (c) 2016 __Pearson Education__. All rights reserved.
