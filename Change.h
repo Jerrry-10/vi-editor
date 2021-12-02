@@ -1,6 +1,7 @@
 /**@file Change.h Page 1
 Class to store the data pertaining to a change in the text file.
 @author Kevin Reid, Jerry Aviles, Xhudita Istrefi
+December 2, 2021
 */
 
 #ifndef CHANGE_H
