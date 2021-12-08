@@ -229,8 +229,8 @@ editor::editor(string file, string keywordFile) {
     }
     else {
 
-        initializeArray(keywords, MAX_ARRAY);
-        bubbleSort(keywords, MAX_ARRAY);
+      //  initializeArray(keywords, MAX_ARRAY);
+        //bubbleSort(keywords, MAX_ARRAY);
 
         /*
             for (int i = 0; i < MAX_ARRAY; i++)
