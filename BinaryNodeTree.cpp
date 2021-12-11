@@ -400,7 +400,6 @@ BinaryNodeTree<ItemType>& BinaryNodeTree<ItemType>::operator=(
 
 int getLargerOfTwo (int value1, int value2)
 {
-     //Considered templating this function, but not every item type has = and >= overloaded.
      int biggerOne = 0 ;
 	
      if (value1 >= value2)
