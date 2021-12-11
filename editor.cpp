@@ -22,6 +22,8 @@ using namespace std;
 //Modified for templation by program authors.
 //Authors' original comment section moved to function protoype in header file.
 
+/*
+
 template<class ItemType>
 int binarySearch(const ItemType anArray[], int first, int last, ItemType target)
 {
@@ -82,6 +84,7 @@ void bubbleSort(ItemType theArray[], int n)
     }  // end while
 }  // end bubbleSort
 
+*/
 
 void colorText(int value) {
 
@@ -113,6 +116,7 @@ void placeCursorAt(Position coordinate) {
 
 // Member functions of class Editor:
 
+/*
 void editor::initializeArray(string theArray[], const int size)
 {
     ifstream infile;
@@ -134,7 +138,7 @@ void editor::initializeArray(string theArray[], const int size)
         infile.close();
     }
 
-}
+} */
 
 void editor::moveUp() {
     if (userPosition.getY() - 1 < 0) { //If out of bounds, do nothing.
@@ -213,8 +217,10 @@ void editor::deleteCurrentLine()
 }
 
 editor::editor() {
-    initializeArray(keywords, MAX_ARRAY);
-    bubbleSort(keywords, MAX_ARRAY);
+   // initializeArray(keywords, MAX_ARRAY);
+   //bubbleSort(keywords, MAX_ARRAY);
+    //Should not call fillKeywordTree() because default constructor cannot take string argument for
+        //value of mKeywordFile.
 }
 editor::editor(string file, string keywordFile) {
 
@@ -231,6 +237,9 @@ editor::editor(string file, string keywordFile) {
 
       //  initializeArray(keywords, MAX_ARRAY);
         //bubbleSort(keywords, MAX_ARRAY);
+        
+        //Use BinarySearchTree.add in loop to fill tree with keywords.
+        fillKeywordTree();
 
         /*
             for (int i = 0; i < MAX_ARRAY; i++)
@@ -275,9 +284,9 @@ void editor::displayLines() { //Iteration 2 version
 }
 */
 
-// Iteration 3 version
+// Iteration 3-4 version
 
-//Method provided by Dr. Sturm. lines 285 and 302 modified by program authors for program compatibility.
+//Method provided by Dr. Sturm. Modified by program authors.
 void editor::displayLines()
 {
     int position;
@@ -299,7 +308,8 @@ void editor::displayLines()
                     i++;
                 }                
 //Page 3  
-                if (binarySearch(keywords, 0, MAX_ARRAY - 1, word) != -1)  //found
+                //Replace binary search with a call to BinarySearchTree.contains(word);
+              if ( !keywordTree.contains(word) )  //found
                     colorText(1);
                 else
                     colorText(0);
@@ -565,4 +575,26 @@ void editor::run() {
 
         }//End switch
     }//End while
+}
+
+void editor::fillKeywordTree()
+{
+    string nextKeyword = "";
+    ifstream infile;
+    infile.open(mKeywordFile);
+
+    if (infile.fail())
+    {
+        cerr << "Error. Unable to open file \"" << mKeywordFile << "\".\n\nGoodbye!\n\n";
+        exit(2);
+    }
+
+    //Loop to read keywords from file into binary search tree keywordTree.
+    while ( !infile.eof() )
+    {
+        infile >> nextKeyword;
+        keywordTree.add(nextKeyword);
+    }
+
+    infile.close();
 }

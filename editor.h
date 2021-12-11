@@ -15,9 +15,10 @@ December 2, 2021
 #include "Change.h"
 #include<memory>
 #include<conio.h>
+#include "BinarySearchTree.h"
 using namespace std;
 
-const int MAX_ARRAY = 60;
+//const int MAX_ARRAY = 60; //obsolete.
 
 class editor {
 
@@ -30,14 +31,17 @@ private:
 	bool changesWereMadeButNotSaved = false;
 	bool endProgram = false;
 	LinkedStack<Change> stackOfChanges;
-	string keywords[MAX_ARRAY];
+	
+	//string keywords[MAX_ARRAY]; //replace with binary search tree
+	BinarySearchTree<string>keywordTree;
+
 	string mKeywordFile = "";
 
 	//Used by multiple methods, so if its value is not hard-coded, it best to make it an attribute.
 	string mTextFile = "";
 	
 	/** Helper function to write contents of Editor object to output file.
-	@post  Contents written to file "test.txt" and changesWereMadeButNotSaved = false. */
+	@post  Contents written to file mTextFile and changesWereMadeButNotSaved = false. */
 	void writeToFile();
 
 	/**Helper function to delete the character at the user's current position.
@@ -52,12 +56,20 @@ private:
 	
 	/*Helper method to read in the data from mKeywordFile and initialize an array with its values.
 	@post  Prints an error message and terminates program if mKeywordFile cannot be opened. Otherwise,
-		the array holds the values from mKeywordFile. */
-	void initializeArray(string theArray[], const int size);
+		the array holds the values from mKeywordFile. 
+	void initializeArray(string theArray[], const int size); */
+
+
+	/**Helper Method to fill keywordTree with strings from mKeywordFile.
+	@pre  mkeywordFile is the name of a valid text file in the same directory as the project and holds
+		strings separated from each other by whitespace.
+	@post  Prints error message and terminates program if mKeywordFile cannot be opened.
+		otherwise, contents of mkeywordFile are read into mKeywordTree.	*/
+	void fillKeywordTree();
 
 public:
 	/** Default Constructor.
-	@post  Instantiates empty Editor object with no text.
+	@post  Instantiates empty editor object with no text. keywordTree is empty.
 	*/
 	editor();
 
@@ -66,7 +78,7 @@ public:
 	@param  keywordFile  The name of the file holding the keywords.
 	@pre  The strings file and keywordFile denote valid text files in the same directory as the project.
 	@post  Prints error message and terminates program if files cannot be opened.
-		Otherwise, each line in file becomes an item in the list lines and the array keywords holds the strings in keywordFile. */
+		Otherwise, each line in file becomes an item in the list lines and keywordTree holds the strings in keywordFile. */
 	editor(string file, string keywordFile);
 
 	/**Function to undo the last change to the text.
@@ -106,8 +118,7 @@ public:
 	void deleteCurrentLine();
 
 
-
-};
+};//End class editor
 
 //Nonmember Functions used by class Editor:
 
@@ -126,7 +137,7 @@ public:
  @param last  The high index to stop searching at.
  @param target  The search key.
  @return  Either index, such that anArray[index] == target, or -1.
-*/
+
 template<class ItemType>
 int binarySearch(const ItemType anArray[], int first, int last, ItemType target);
 
@@ -142,9 +153,11 @@ int binarySearch(const ItemType anArray[], int first, int last, ItemType target)
  @pre  None.
  @post  theArray is sorted into ascending order; n is unchanged.
  @param theArray  The given array.
- @param n  The size of theArray. */
+ @param n  The size of theArray. 
 template<class ItemType>
 void bubbleSort(ItemType theArray[], int n);
+
+*/
 
 void colorText(int value);
 
