@@ -18,12 +18,12 @@ int BinaryNodeTree<ItemType>::getHeightHelper(std::shared_ptr<BinaryNode<ItemTyp
       return 0;
    else
    {
-       /*  Broken Code
+       //Plan A
        return 1 + getLargerOfTwo(getHeightHelper(subTreePtr->getLeftChildPtr()),
                       getHeightHelper(subTreePtr->getRightChildPtr()));
       
-      
-      Plan B workaround: */
+         /*
+      Plan B workaround: 
        int leftSubtree = getHeightHelper(subTreePtr->getLeftChildPtr() );
        int rightSubtree = getHeightHelper(subTreePtr->getRightChildPtr() );
 
@@ -37,7 +37,7 @@ int BinaryNodeTree<ItemType>::getHeightHelper(std::shared_ptr<BinaryNode<ItemTyp
        {
            larger = rightSubtree;
        }
-       return larger + 1; 
+       return larger + 1; */
    }
 }  // end getHeightHelper
 
@@ -398,7 +398,6 @@ BinaryNodeTree<ItemType>& BinaryNodeTree<ItemType>::operator=(
 //	Non-member function added by program authors December 8, 2021
 /////////////////////////////////////////////////////////////////////
 
-/*
 int getLargerOfTwo (int value1, int value2)
 {
      //Considered templating this function, but not every item type has = and >= overloaded.
@@ -415,4 +414,3 @@ int getLargerOfTwo (int value1, int value2)
      
      return biggerOne;
 }	
-*/
