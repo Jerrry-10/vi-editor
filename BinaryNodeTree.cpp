@@ -1,5 +1,6 @@
 //  Created by Frank M. Carrano and Timothy M. Henry.
 //  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
+//Modified by program authors December 12, 2021
 
 /** @file BinaryNodeTree.cpp */
 
@@ -11,6 +12,7 @@
 //      Protected Utility Methods Section
 //////////////////////////////////////////////////////////////
 
+//Method modified by program authors.
 template<class ItemType>
 int BinaryNodeTree<ItemType>::getHeightHelper(std::shared_ptr<BinaryNode<ItemType>> subTreePtr) const
 {
@@ -20,7 +22,7 @@ int BinaryNodeTree<ItemType>::getHeightHelper(std::shared_ptr<BinaryNode<ItemTyp
    {
        /*Plan A
        
-       Broken Code! Will not compile on Kevin's Computer.
+       Broken Code! Will not compile.
        
        return 1 + getLargerOfTwo(getHeightHelper(subTreePtr->getLeftChildPtr()),
                       getHeightHelper(subTreePtr->getRightChildPtr())); */
@@ -403,7 +405,7 @@ BinaryNodeTree<ItemType>& BinaryNodeTree<ItemType>::operator=(
 
 
 
- /*Broken Code! Will not compile on Kevin's Computer.
+ /*Broken Code! Will not compile.
 
 int getLargerOfTwo (int value1, int value2)
 {

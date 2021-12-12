@@ -1,6 +1,6 @@
 /** @file  editor.cpp Page 1
 @author Kevin Reid, Jerry Aviles, & Xhudita Istrefi
-December 2, 2021
+December 12, 2021
 */
 #include "editor.h"
 #include "LinkedStack.h"
@@ -98,6 +98,8 @@ void colorText(int value) {
 
 }
 
+//Page 2
+
 void placeCursorAt(Position coordinate) {
 
     COORD coord;
@@ -157,6 +159,7 @@ void editor::moveUp() {
     placeCursorAt(userPosition); //Places the cursor at the updated position
     // else error
 }
+
 void editor::moveDown() {
     if (userPosition.getY() + 2 > lines.getLength()) { //If out of bounds, do nothing.
 
@@ -175,6 +178,7 @@ void editor::moveDown() {
     // cout << lines.getLength();
     placeCursorAt(userPosition);
 }
+
 void editor::moveLeft() {
     if (userPosition.getX() > 0) { //Check for out of bounds
         userPosition.setX(userPosition.getX() - 1); //Set position to be 1 to the left.
@@ -182,6 +186,7 @@ void editor::moveLeft() {
 
     placeCursorAt(userPosition); //Places the cursor at the updated position
 }
+
 void editor::moveRight() {
 
     //get Length of current line
@@ -194,6 +199,9 @@ void editor::moveRight() {
     }
     placeCursorAt(userPosition);
 }
+
+//Page 3  
+
 void editor::deleteCurrentLine()
 {
     int currentLine = userPosition.getY() + 1; //Need +1 because list Lines starts at 1 but coordinates in class Position start at 0.
@@ -201,7 +209,7 @@ void editor::deleteCurrentLine()
     lines.remove(currentLine); //Delete the line. Current line = next line.
 
     
-    //Page 2
+   
     
     //Get Length of new current line.
     string thisLine = lines.getEntry(currentLine);
@@ -307,9 +315,9 @@ void editor::displayLines()
                     word += nextLine[i];
                     i++;
                 }                
-//Page 3  
+//Page 4
                 //Replace binary search with a call to BinarySearchTree.contains(word);
-              if ( !keywordTree.contains(word) )  //found
+              if ( !keywordTree.contains(word) )  //Added the ! as a bug fix. Otherwise, all NON-keywords are colored blue.
                     colorText(1);
                 else
                     colorText(0);
@@ -404,13 +412,13 @@ void editor::writeToFile()
     outfile.close();
 }
 
+//Page 5
+
 void editor::deleteCurrentCharacter(Position userPosition)
 {
     string tempString = "";
     int lineNumber = userPosition.getY() + 1;
     int characterPosition = userPosition.getX();
-
-//Page 4
     
     //delete current char.
     tempString = lines.getEntry(lineNumber);
@@ -495,7 +503,7 @@ void editor::run() {
             newDeletion.setChangedCharacters(toBeDeleted);
             newDeletion.setCommand(command);
             newDeletion.setLineNumber(currentLineNumber);
-              
+//Page 6             
             //Push Change object onto stack to save data for the undo feature.
             success = stackOfChanges.push(newDeletion);
 
@@ -507,7 +515,7 @@ void editor::run() {
 
             deleteCurrentCharacter(userPosition);
             changesWereMadeButNotSaved = true;
-//Page 5      
+      
             displayLines(); //Allows user to see change in real time.
             break;
         case 'j': case KEY_DOWN:

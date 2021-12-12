@@ -110,8 +110,10 @@ public:
 Considered templating this function, but not every item type has = and >= overloaded.
 @param value1  A value to be compared.
 @param value2  The value to be compared to value1.
-@return  value1 if value1 >= value2. Otherwise, returns value2. */
-int getLargerOfTwo (int value1, int value2);
+@return  value1 if value1 >= value2. Otherwise, returns value2. 
+
+Broken Code! Will not compile.
+int getLargerOfTwo (int value1, int value2); */
 
 #include "BinaryNodeTree.cpp"
 #endif
